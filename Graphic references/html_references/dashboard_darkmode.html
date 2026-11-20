@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Dashboard General - AgentHub</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#6366F1",
+              hover: "#4F46E5",
+              accent: "#1E2542",
+              light: "#EEF2FF"
+            },
+            canvas: {
+              light: "#F8FAFC",
+              dark: "#0B0F19"
+            },
+            card: {
+              light: "#FFFFFF",
+              dark: "#131A2B"
+            },
+            elevated: {
+              light: "#F1F5F9",
+              dark: "#1E293B"
+            },
+            border: {
+              light: "#E2E8F0",
+              dark: "#293548"
+            },
+            text: {
+              primary: {
+                light: "#0F172A",
+                dark: "#F8FAFC"
+              },
+              secondary: {
+                light: "#64748B",
+                dark: "#94A3B8"
+              }
+            },
+            semantic: {
+              success: "#10B981",
+              successDark: "#34D399",
+              warning: "#F59E0B",
+              warningDark: "#FBBF24",
+              danger: "#EF4444",
+              dangerDark: "#F87171"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] dark:bg-[#0B0F19] text-[#0F172A] dark:text-[#F8FAFC] min-h-screen transition-colors duration-200">
+  <!-- Sidebar Lateral -->
+  <aside class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-[#131A2B] border-r border-[#E2E8F0] dark:border-[#293548] z-50 flex flex-col justify-between transition-colors duration-200">
+    <div class="flex flex-col flex-1">
+      <!-- Logo Oficial AgentHub -->
+      <div class="h-16 px-5 flex items-center border-b border-[#E2E8F0] dark:border-[#293548]">
+        <img alt="AgentHub Logo" class="h-9 w-auto object-contain dark:hidden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFpI-7f50kTl40bwxj0IiYEeMsvaE_n09gzia_VqqNhnxdkUt7ZWpfLzgaDrD3ypgMfQVxpdD3BdFaXqvaqxM7zJ-ArqLqkLAUSYuso117l-n3OSdBJrl9LZ3PHnm5S8k2ciyYAWAT1jLLpcZOnOKa8X8rnKHP50Oq0aYd6g8ZhaB7eddmDAX_CC2mTR7UCoQ4mqABBb1Qq2NMBc1tCCfYzaoQjoXaciMnnzE7I6MH3TxqmprnO_LUPA"/>
+        <img alt="AgentHub Logo" class="h-9 w-auto object-contain hidden dark:block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFccJDKYtubX9V6BvFrFlBuBcr4QGF_JXyEwOr0Sfdhp3uiWXPdCoC4Sy2HXA5jtPMHxAx7xD-_LYfe6l-AWdd8QvFgEFptlDVX_QoRHd5ZrXho86l9U9vmoNIAhxSKrSjZhIcKzS65VW8tKdo5cmVjqEeezGoL7plRuTeTWHMmolkkpkGkN-RL1CyO2rk-4iU42bWxNLL2cbaxtHX45Nhnts2AgVRd5-lyKoeCGK4kz3hJfVjECvIHA"/>
+      </div>
+      <!-- Navigation -->
+      <div class="px-3 py-4 flex-1 overflow-y-auto">
+        <div class="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider px-3 mb-2">
+          Plataforma
+        </div>
+        <nav class="space-y-1">
+          <!-- Dashboard (ACTIVO) con marco lateral izquierdo y estilo alineado -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#6366F1] text-white font-medium text-sm shadow-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">grid_view</span>
+            <span>Dashboard</span>
+          </a>
+          <!-- Gestión de usuarios -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">group</span>
+            <span>Gestión de usuarios</span>
+          </a>
+          <!-- Gestión de agentes -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">smart_toy</span>
+            <span>Gestión de agentes</span>
+          </a>
+          <!-- Skills -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">extension</span>
+            <span>Skills</span>
+          </a>
+          <!-- Contrataciones -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+            <span>Contrataciones</span>
+          </a>
+          <!-- Log de errores -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+            <span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+            <span>Log de errores</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+    <!-- Footer Sidebar con Badge Status Cluster -->
+    <div class="p-4 border-t border-[#E2E8F0] dark:border-[#293548]">
+      <div class="p-3 bg-[#F1F5F9] dark:bg-[#1E293B] rounded-lg border border-[#E2E8F0] dark:border-[#293548]">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">CLUSTER NEXAI</span>
+          <span class="flex h-2 w-2 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
+          </span>
+        </div>
+        <div class="font-mono text-xs text-[#0F172A] dark:text-[#F8FAFC] truncate font-medium">v2.4.0-prod-node</div>
+        <div class="mt-2 flex items-center justify-between text-xs text-[#64748B] dark:text-[#94A3B8]">
+          <span>Sync Status</span>
+          <span class="font-semibold text-[#10B981] dark:text-[#34D399]">99.98%</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Contenedor Principal (pl-64 para dejar espacio al sidebar) -->
+  <div class="pl-64 flex flex-col min-h-screen">
+    <!-- Header Superior con Marco Delimitador en #6366F1 -->
+    <header class="sticky top-0 h-16 bg-white dark:bg-[#131A2B] border-b-2 border-[#6366F1] shadow-[0_4px_12px_rgba(99,102,241,0.08)] z-40 px-6 flex items-center justify-between gap-4 transition-colors duration-200">
+      <!-- Buscador -->
+      <div class="flex items-center flex-1 max-w-lg">
+        <div class="relative w-full">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] dark:text-[#94A3B8] text-[20px]">search</span>
+          <input class="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] placeholder-[#64748B] dark:placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all" placeholder="Buscar agentes, contratos, logs..." type="text"/>
+        </div>
+      </div>
+      <!-- Acciones de Cabecera -->
+      <div class="flex items-center gap-3">
+        <!-- Toggle Modo Oscuro/Claro -->
+        <button class="w-10 h-10 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-center transition-colors" onclick="document.documentElement.classList.toggle('dark')" title="Alternar Modo Claro / Oscuro">
+          <span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
+          <span class="material-symbols-outlined text-[20px] hidden dark:inline">light_mode</span>
+        </button>
+        <!-- Notificaciones con badge -->
+        <button class="relative w-10 h-10 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-center transition-colors" title="Notificaciones">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#EF4444]"></span>
+        </button>
+        <div class="h-6 w-[1px] bg-[#E2E8F0] dark:bg-[#293548] mx-1"></div>
+        <!-- Perfil Usuario -->
+        <div class="flex items-center gap-3 pl-1">
+          <div class="w-9 h-9 rounded-full bg-[#0F172A] dark:bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            AD
+          </div>
+          <div class="hidden md:flex flex-col text-left">
+            <span class="text-sm font-semibold text-[#0F172A] dark:text-[#F8FAFC] leading-tight">Admin NEXAI</span>
+            <span class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] tracking-wider uppercase">SUPER ADMIN</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido del Dashboard -->
+    <main class="flex-1 p-6 space-y-6">
+      <!-- Subcabecera & Controles de Rango Temporal -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider mb-1">
+            <span>Visión General</span>
+            <span>/</span>
+            <span class="text-[#6366F1] font-bold">Dashboard Principal</span>
+          </div>
+          <h1 class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">Dashboard General</h1>
+          <p class="text-sm text-[#64748B] dark:text-[#94A3B8] mt-0.5">Resumen operativo, métricas financieras y salud del clúster de agentes en AgentHub</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <!-- Filtro temporal (30D, 7D, 24H) -->
+          <div class="flex items-center bg-white dark:bg-[#131A2B] p-1 rounded-lg border border-[#E2E8F0] dark:border-[#293548] shadow-sm">
+            <button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-[#6366F1] text-white shadow-sm transition-all">30D</button>
+            <button class="px-3 py-1.5 text-xs font-medium rounded-md text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] transition-colors">7D</button>
+            <button class="px-3 py-1.5 text-xs font-medium rounded-md text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] transition-colors">24H</button>
+          </div>
+          <!-- Botón Exportar -->
+          <button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#0F172A] dark:text-[#F8FAFC] text-sm font-medium transition-colors shadow-sm">
+            <span class="material-symbols-outlined text-[18px] text-[#64748B] dark:text-[#94A3B8]">download</span>
+            <span>Exportar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Las 4 Tarjetas KPI con Cabeceras Destacadas y Bordes de Acento Oficiales -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. Ingresos Generados -->
+        <div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#6366F1] shadow-sm overflow-hidden flex flex-col justify-between">
+          <div class="p-4 bg-[#F8FAFC] dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">Ingresos Generados</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1]">Mes Actual</span>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">payments</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div class="flex items-baseline justify-between mb-3">
+              <div class="text-3xl font-bold font-mono text-[#0F172A] dark:text-[#F8FAFC]">€48.250</div>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981] dark:text-[#34D399]">
+                <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                +14.2%
+              </span>
+            </div>
+            <!-- Sparkline Visual -->
+            <div class="w-full pt-1">
+              <svg class="w-full h-8 overflow-visible" viewBox="0 0 160 32" fill="none">
+                <path d="M0 24C25 22 45 20 70 14C95 8 120 12 160 2" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="160" cy="2" r="3.5" fill="#10B981"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-[11px] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-between">
+              <span>Objetivo mensual</span>
+              <span class="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">96.5% alcanzado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Descuentos & Cupones -->
+        <div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#F59E0B] shadow-sm overflow-hidden flex flex-col justify-between">
+          <div class="p-4 bg-[#F8FAFC] dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">Descuentos & Cupones</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] text-[#F59E0B] dark:text-[#FBBF24]">Promos</span>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] text-[#F59E0B] dark:text-[#FBBF24] flex items-center justify-center">
+              <span class="material-symbols-outlined text-[18px]">sell</span>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div class="flex items-baseline justify-between mb-3">
+              <div class="text-3xl font-bold font-mono text-[#0F172A] dark:text-[#F8FAFC]">€3.180</div>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] text-[#F59E0B] dark:text-[#FBBF24]">
+                <span class="material-symbols-outlined text-[14px]">trending_down</span>
+                -5.8%
+              </span>
+            </div>
+            <!-- Sparkline Visual -->
+            <div class="w-full pt-1">
+              <svg class="w-full h-8 overflow-visible" viewBox="0 0 160 32" fill="none">
+                <path d="M0 6C35 8 60 14 90 18C120 22 140 24 160 28" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="160" cy="28" r="3.5" fill="#F59E0B"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-[11px] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-between">
+              <span>Campañas activas</span>
+              <span class="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">3 cupones aplicados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Agentes Activos -->
+        <div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#10B981] shadow-sm overflow-hidden flex flex-col justify-between">
+          <div class="p-4 bg-[#F8FAFC] dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">Agentes Activos</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981] dark:text-[#34D399]">Clúster Prod</span>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXyzE83rbUTGA2qnAIGJAeaSsZoZHCVj8dwkCaji5t4NBraZcIfXTTIqIG6w5KbLa-0jeneHVPfIIlAf6Xfw_QFGo0bB6Z9PbtwXDZn-9a5erdr2p4vzhnyXRIZ8SusIcX7nzv4YbZVucaAVCEdW758EJTHCl_NS3CT0SpPxs5VCAZc5l-ubTRFaHqU9O30TcM1anCKQtRG8xbMK4GPiTJgs4PhEjtVyc5m-aVdVJx8AblYR1eJmbvng" alt="Agentes Activos" class="w-6 h-6 object-contain"/>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div class="flex items-baseline justify-between mb-3">
+              <div class="text-3xl font-bold font-mono text-[#0F172A] dark:text-[#F8FAFC]">142</div>
+              <span class="inline-flex items-center gap-1.5 text-xs font-medium text-[#10B981] dark:text-[#34D399]">
+                <span class="w-2 h-2 rounded-full bg-[#10B981] dark:bg-[#34D399] animate-pulse"></span>
+                97.2% online
+              </span>
+            </div>
+            <!-- Sparkline Visual -->
+            <div class="w-full pt-1">
+              <svg class="w-full h-8 overflow-visible" viewBox="0 0 160 32" fill="none">
+                <path d="M0 26C30 24 60 22 90 16C120 10 140 6 160 2" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="160" cy="2" r="3.5" fill="#6366F1"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-[11px] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-between">
+              <span>Carga concurrente</span>
+              <span class="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">1.9k req/seg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Agentes con Fallos / Incidencias -->
+        <div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#EF4444] shadow-sm overflow-hidden flex flex-col justify-between">
+          <div class="p-4 bg-[#F8FAFC] dark:bg-[#1E293B] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-[#EF4444] dark:text-[#F87171] uppercase tracking-wider">Agentes con Fallos</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#FEF2F2] dark:bg-[rgba(127,29,29,0.3)] text-[#EF4444] dark:text-[#F87171]">Crítico</span>
+            </div>
+            <div class="w-8 h-8 rounded-lg bg-[#FEF2F2] dark:bg-[rgba(127,29,29,0.3)] text-[#EF4444] flex items-center justify-center">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAq_M-mOYaT41uUJm2EhqmHWMMbMgx9WhhVsOy3LsvQtSYbk__mwL0lt99IWbsDh4esCN9-C7V94vth7pcOSfFl9OqfZ_oZt00c89_10Q5IT8_Ra47uZw1swMTf2u_ZHpEJMhBiZWSEYs7wZrHSks6cp-m8qhf2wOPE3qkIY_g71sbY89mDUuMqrhMLM8iukI_I07QlM7cPfl4x2O04cQMbpq2zc6z2obPgdmkxdIJRlzDZqEoDvg4Vg" alt="Agentes con Fallos" class="w-6 h-6 object-contain"/>
+            </div>
+          </div>
+          <div class="p-5 flex flex-col justify-between flex-1">
+            <div class="flex items-baseline justify-between mb-3">
+              <div class="text-3xl font-bold font-mono text-[#EF4444] dark:text-[#F87171]">4</div>
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FEF2F2] dark:bg-[rgba(127,29,29,0.3)] text-[#EF4444] dark:text-[#F87171]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span>
+                Estado Crítico
+              </span>
+            </div>
+            <!-- Sparkline Visual -->
+            <div class="w-full pt-1">
+              <svg class="w-full h-8 overflow-visible" viewBox="0 0 160 32" fill="none">
+                <path d="M0 24C40 22 80 18 120 12C140 8 150 14 160 6" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="160" cy="6" r="3.5" fill="#EF4444"/>
+              </svg>
+            </div>
+            <div class="mt-2 text-[11px] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-between">
+              <span>Incidencia destacada</span>
+              <span class="font-semibold text-[#EF4444] truncate max-w-[120px]" title="Whisper v3 timeout degradado">Whisper v3 timeout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfico de Actividad Semanal (Card con cabecera y estética oficial) -->
+      <div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] shadow-sm overflow-hidden flex flex-col">
+        <!-- Cabecera del Gráfico -->
+        <div class="p-5 border-b border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">Gráfico de Actividad Semanal</h2>
+            <p class="text-xs text-[#64748B] dark:text-[#94A3B8] mt-0.5">Volumen y distribución de ejecuciones de agentes y llamadas a skills por día</p>
+          </div>
+          <!-- Leyenda interactiva -->
+          <div class="flex items-center gap-5 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded bg-[#6366F1]"></span>
+              <span class="font-medium text-[#64748B] dark:text-[#94A3B8]">Ejecuciones Principales</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded bg-[#1E2542] dark:bg-[#818CF8]"></span>
+              <span class="font-medium text-[#64748B] dark:text-[#94A3B8]">Llamadas a Skills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área de visualización del Gráfico de Barras -->
+        <div class="p-6">
+          <div class="h-64 w-full flex items-end justify-between gap-4 sm:gap-8 px-4 pt-6 pb-2 border-b border-[#E2E8F0] dark:border-[#293548]">
+            <!-- Lunes -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1] hover:brightness-110 rounded-t-md transition-all relative" style="height: 52%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    52k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542] dark:bg-[#818CF8] hover:brightness-110 rounded-t-md transition-all relative" style="height: 38%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    38k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">Lun</span>
+            </div>
+
+            <!-- Martes -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1] hover:brightness-110 rounded-t-md transition-all relative" style="height: 64%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    64k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542] dark:bg-[#818CF8] hover:brightness-110 rounded-t-md transition-all relative" style="height: 48%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    48k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">Mar</span>
+            </div>
+
+            <!-- Miércoles (PICO MÁXIMO) -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full relative">
+                <!-- Indicador de Pico -->
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#10B981] dark:bg-[#34D399] shadow-sm"></div>
+                <div class="w-1/2 bg-[#6366F1] hover:brightness-110 rounded-t-md transition-all relative" style="height: 88%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    88k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542] dark:bg-[#818CF8] hover:brightness-110 rounded-t-md transition-all relative" style="height: 72%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    72k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-bold text-[#6366F1] dark:text-[#818CF8]">Mié</span>
+            </div>
+
+            <!-- Jueves -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1] hover:brightness-110 rounded-t-md transition-all relative" style="height: 76%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    76k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542] dark:bg-[#818CF8] hover:brightness-110 rounded-t-md transition-all relative" style="height: 60%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    60k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">Jue</span>
+            </div>
+
+            <!-- Viernes -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1] hover:brightness-110 rounded-t-md transition-all relative" style="height: 80%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    80k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542] dark:bg-[#818CF8] hover:brightness-110 rounded-t-md transition-all relative" style="height: 68%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    68k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">Vie</span>
+            </div>
+
+            <!-- Sábado -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group opacity-75">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1]/70 hover:bg-[#6366F1] rounded-t-md transition-all relative" style="height: 38%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    38k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542]/70 dark:bg-[#818CF8]/70 hover:brightness-110 rounded-t-md transition-all relative" style="height: 28%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    28k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-medium text-[#64748B] dark:text-[#94A3B8]">Sáb</span>
+            </div>
+
+            <!-- Domingo -->
+            <div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group opacity-75">
+              <div class="w-full max-w-[56px] flex items-end justify-center gap-1.5 h-full">
+                <div class="w-1/2 bg-[#6366F1]/70 hover:bg-[#6366F1] rounded-t-md transition-all relative" style="height: 32%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    32k
+                  </div>
+                </div>
+                <div class="w-1/2 bg-[#1E2542]/70 dark:bg-[#818CF8]/70 hover:brightness-110 rounded-t-md transition-all relative" style="height: 24%">
+                  <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-[#0F172A] text-white text-[10px] font-mono py-0.5 px-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                    24k
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs font-medium text-[#64748B] dark:text-[#94A3B8]">Dom</span>
+            </div>
+          </div>
+
+          <!-- Métricas Resumen del Gráfico -->
+          <div class="mt-4 pt-3 flex flex-wrap items-center justify-between text-xs text-[#64748B] dark:text-[#94A3B8] gap-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-[#10B981] dark:text-[#34D399]">check_circle</span>
+              <span>Total de ejecuciones semanales: <strong class="text-[#0F172A] dark:text-[#F8FAFC]">430.000 operaciones</strong></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-[#6366F1]">speed</span>
+              <span>Tiempo medio de respuesta: <strong class="text-[#0F172A] dark:text-[#F8FAFC]">420ms</strong></span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-[#10B981] dark:text-[#34D399]">sync</span>
+              <span>Tasa global de éxito: <strong class="text-[#10B981] dark:text-[#34D399]">99.1%</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Log de Errores - AgentHub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#6366F1",
+              hover: "#4F46E5",
+              accent: "#1E2542",
+              light: "#EEF2FF"
+            },
+            canvas: {
+              light: "#F8FAFC",
+              dark: "#0B0F19"
+            },
+            card: {
+              light: "#FFFFFF",
+              dark: "#131A2B"
+            },
+            elevated: {
+              light: "#F1F5F9",
+              dark: "#1E293B"
+            },
+            border: {
+              light: "#E2E8F0",
+              dark: "#293548"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .row-resolved {
+      background-color: #ECFDF5 !important;
+      border-left: 4px solid #10B981 !important;
+    }
+    .row-resolved .log-message-text {
+      color: #64748B !important;
+      text-decoration: line-through;
+      text-decoration-color: #10B981;
+    }
+    .row-resolved .log-code-badge {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-[#0F172A] min-h-screen transition-colors duration-200">
+<!-- Sidebar Lateral Oficial Light Mode -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-[#E2E8F0] z-50 flex flex-col justify-between transition-colors duration-200 shadow-sm">
+<div class="flex flex-col flex-1">
+<!-- Logo Oficial AgentHub (Light Mode) -->
+<div class="h-16 px-5 flex items-center border-b border-[#E2E8F0]">
+<img alt="AgentHub Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWed4bMUhiqIGazpEHEOVxrkEBPTHuPmb7eynOeHBr9K96OMJB5inA46NnkNJLQ6g29x0QxdaPd3C-naHL_bYx5DJdFQfos20mYOoyCuPgeaBMdYnwA94EbGnfgUsgNhia6iWC9wstZQNtCPjG7xQpRR7lDhjwq5Ev3feBzU-UULRil9dvanGwh7Qvc9OnvwDxgSk9_WRon-RaGr73L4PG7XfpoW9SWCppbvR0q6K5oAbMGrZD7mHCmw"/>
+</div>
+<!-- Navigation -->
+<div class="px-3 py-4 flex-1 overflow-y-auto">
+<div class="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider px-3 mb-2">
+          Plataforma
+        </div>
+<nav class="space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Dashboard</span>
+</a>
+<!-- Gestión de usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span>Gestión de usuarios</span>
+</a>
+<!-- Gestión de agentes -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Gestión de agentes</span>
+</a>
+<!-- Skills -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span>Skills</span>
+</a>
+<!-- Contrataciones -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Contrataciones</span>
+</a>
+<!-- Log de errores (ACTIVO) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#6366F1] text-white font-medium text-sm shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+<span>Log de errores</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Footer Sidebar con Badge Status Cluster -->
+<div class="p-4 border-t border-[#E2E8F0]">
+<div class="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">CLUSTER NEXAI</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
+</span>
+</div>
+<div class="font-mono text-xs text-[#0F172A] truncate font-medium">v2.4.0-prod-node</div>
+<div class="mt-2 flex items-center justify-between text-xs text-[#64748B]">
+<span>Sync Status</span>
+<span class="font-semibold text-[#10B981]">99.98%</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Contenedor Principal -->
+<div class="pl-64 flex flex-col min-h-screen bg-[#F8FAFC]">
+<!-- Header Superior Oficial Light Mode con border-b-2 y shadow -->
+<header class="sticky top-0 h-16 bg-white border-b-2 border-[#6366F1] shadow-[0_4px_12px_rgba(99,102,241,0.08)] z-40 px-6 flex items-center justify-between gap-4 transition-colors duration-200">
+<!-- Buscador -->
+<div class="flex items-center flex-1 max-w-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all" placeholder="Buscar errores, agentes, runtimes, trace IDs... (Cmd + K)" type="text"/>
+</div>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-3">
+<!-- Toggle Modo Claro/Oscuro -->
+<button class="w-10 h-10 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] flex items-center justify-center transition-colors" onclick="document.documentElement.classList.toggle('dark')" title="Alternar Modo Claro / Oscuro">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</button>
+<!-- Notificaciones con badge -->
+<button class="relative w-10 h-10 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] flex items-center justify-center transition-colors" title="Notificaciones">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#EF4444]"></span>
+</button>
+<div class="h-6 w-[1px] bg-[#E2E8F0] mx-1"></div>
+<!-- Perfil Usuario -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            AD
+          </div>
+<div class="hidden md:flex flex-col text-left">
+<span class="text-sm font-semibold text-[#0F172A] leading-tight">Admin NEXAI</span>
+<span class="text-[10px] font-bold text-[#64748B] tracking-wider uppercase">SUPER ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Contenido Principal: Log de Errores -->
+<main class="flex-1 p-6 space-y-6">
+<!-- Subcabecera de Sección & Acciones -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-1">
+<span>Monitorización</span>
+<span>/</span>
+<span class="text-[#6366F1] font-bold">Log de Errores</span>
+</div>
+<div class="flex items-center gap-3">
+<h1 class="text-2xl font-bold text-[#0F172A] tracking-tight">Log de Errores</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#ECFDF5] text-[#059669] border border-[#10B981]/30">
+<span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              Live Stream
+            </span>
+</div>
+<p class="text-sm text-[#64748B] mt-0.5">Registro detallado de incidencias en tiempo real, excepciones de ejecución y fallos de inferencia</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-sm font-medium transition-colors shadow-sm" onclick="exportLogs()">
+<span class="material-symbols-outlined text-[18px] text-[#64748B]">download</span>
+<span>Exportar Logs</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="openAlertConfigModal()">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>+ Configurar Alertas</span>
+</button>
+</div>
+</div>
+<!-- Tarjetas KPI Compactas (Light Mode Oficial) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Total Errores (24h) -->
+<div class="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-sm">
+<div class="flex items-center justify-between text-[#64748B] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">Total Errores (24h)</span>
+<div class="w-8 h-8 rounded-lg bg-[#EEF2FF] flex items-center justify-center text-[#6366F1]">
+<span class="material-symbols-outlined text-[20px]">report</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A]" id="kpiTotalErrors">248</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/20">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +14% vs ayer
+            </span>
+</div>
+<div class="mt-2 text-[11px] text-[#64748B]">24,192 ejecuciones registradas</div>
+</div>
+<!-- Errores Críticos (P0) -->
+<div class="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-sm">
+<div class="flex items-center justify-between text-[#64748B] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#DC2626]">Errores Críticos (P0)</span>
+<div class="w-8 h-8 rounded-lg bg-[#FEF2F2] flex items-center justify-center text-[#DC2626]">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#DC2626]" id="kpiCriticalP0">4</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/20">
+              Atención inmediata
+            </span>
+</div>
+<div class="mt-2 text-[11px] text-[#64748B]">Servicios afectados: OCR, Memory Sandbox</div>
+</div>
+<!-- Tasa de Fallos (Error Rate) -->
+<div class="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-sm">
+<div class="flex items-center justify-between text-[#64748B] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">Tasa de Fallos (Error Rate)</span>
+<div class="w-8 h-8 rounded-lg bg-[#ECFDF5] flex items-center justify-center text-[#10B981]">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#10B981]">0.89%</div>
+<span class="inline-flex items-center gap-1.5 text-xs font-medium text-[#10B981]">
+              Dentro del SLA (&lt;1.0%)
+            </span>
+</div>
+<div class="mt-2 text-[11px] text-[#64748B]">Disponibilidad 99.11% global</div>
+</div>
+<!-- Tiempo Medio Resolución (MTTR) -->
+<div class="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-sm">
+<div class="flex items-center justify-between text-[#64748B] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">Tiempo Medio Resolución</span>
+<div class="w-8 h-8 rounded-lg bg-[#F1F5F9] flex items-center justify-center text-[#64748B]">
+<span class="material-symbols-outlined text-[20px]">timer</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A]">14.2 min</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#ECFDF5] text-[#10B981] border border-[#10B981]/20">
+              -3.1m vs media
+            </span>
+</div>
+<div class="mt-2 text-[11px] text-[#64748B]">Resolución automatizada en 68%</div>
+</div>
+</div>
+<!-- Panel Principal de Logs: Filtros y Tabla -->
+<div class="rounded-xl bg-white border border-[#E2E8F0] shadow-sm overflow-visible flex flex-col">
+<!-- Barra de Búsqueda y Filtros de la Tabla -->
+<div class="p-4 border-b border-[#E2E8F0] bg-white flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+<!-- Búsqueda rápida -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all" id="logSearchInput" placeholder="Filtrar por trace ID, mensaje de error, agente o código..." type="text"/>
+</div>
+<!-- Filtros de Gravedad, Agente, Código y Rango -->
+<div class="flex items-center gap-2 flex-wrap">
+<!-- Filtro de Gravedad en Pills -->
+<div class="flex items-center gap-1 bg-[#F1F5F9] p-1 rounded-lg border border-[#E2E8F0]">
+<button class="px-2.5 py-1 rounded-md text-xs font-semibold bg-white text-[#0F172A] shadow-sm transition-all severity-pill" data-severity="all">Todos</button>
+<button class="px-2.5 py-1 rounded-md text-xs font-medium text-[#DC2626] hover:bg-[#FEF2F2] transition-colors severity-pill" data-severity="p0">Crítico P0 (4)</button>
+<button class="px-2.5 py-1 rounded-md text-xs font-medium text-[#D97706] hover:bg-[#FFFBEB] transition-colors severity-pill" data-severity="p1">Alto P1 (18)</button>
+<button class="px-2.5 py-1 rounded-md text-xs font-medium text-[#4F46E5] hover:bg-[#EEF2FF] transition-colors severity-pill" data-severity="p2">Medio P2 (52)</button>
+</div>
+<!-- Filtro Agente / Skill -->
+<select class="px-3 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#6366F1]" id="filterAgent">
+<option value="all">Agente: Todos</option>
+<option value="docparser">DocParser Core</option>
+<option value="whisper">Whisper v3 STT</option>
+<option value="saleslead">SalesLead Hunter</option>
+<option value="nexus">Nexus Support v2</option>
+<option value="finance">FinanceAnalyzer Pro</option>
+</select>
+<!-- Filtro Código HTTP -->
+<select class="px-3 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#6366F1]" id="filterCode">
+<option value="all">Código: Todos</option>
+<option value="504">504 Gateway Timeout</option>
+<option value="422">422 Unprocessable</option>
+<option value="429">429 Rate Limit</option>
+<option value="500">500 Internal Error</option>
+<option value="oom">OOM-Killed (Kernel)</option>
+</select>
+<!-- Selector Temporal -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs text-[#64748B]">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">history</span>
+<select class="bg-transparent text-xs font-medium text-[#0F172A] focus:outline-none cursor-pointer" id="filterTime">
+<option value="24h">Últimas 24h</option>
+<option value="7d">Últimos 7 días</option>
+<option value="live">Tiempo real (Stream)</option>
+</select>
+</div>
+<button class="px-2.5 py-1.5 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-xs font-medium text-[#64748B] hover:text-[#0F172A] transition-colors" id="btnResetFilters" title="Limpiar filtros">
+              Limpiar
+            </button>
+</div>
+</div>
+<!-- Tabla SaaS de Logs de Errores -->
+<div class="overflow-x-auto min-h-[360px]">
+<table class="w-full text-left text-sm text-[#0F172A]" id="errorLogTable">
+<thead>
+<tr class="bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-semibold text-[#64748B] uppercase tracking-wider select-none">
+<th class="py-3.5 px-5">Timestamp / Trace ID</th>
+<th class="py-3.5 px-5">Agente / Skill Afectada</th>
+<th class="py-3.5 px-5 min-w-[320px]">Mensaje de Error &amp; Contexto</th>
+<th class="py-3.5 px-5">Gravedad</th>
+<th class="py-3.5 px-5">Código / HTTP</th>
+<th class="py-3.5 px-5 text-right font-semibold text-[#64748B] uppercase tracking-wider">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2E8F0]" id="logTableBody">
+<!-- Fila 1: DocParser Core (Crítico P0 - 504 Timeout) -->
+<tr class="hover:bg-[#F8FAFC] transition-all group bg-[#FEF2F2]/40" data-trace-key="TRACE-1094" id="row-TRACE-1094">
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-xs text-[#0F172A]">14:42:19 UTC</span>
+<span class="font-mono text-[11px] text-[#6366F1]">trc_1094_dp_ocr</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/20 flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[20px]">policy</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] flex items-center gap-1.5">
+                        DocParser Core
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]">v2.1</span>
+</div>
+<div class="text-xs text-[#64748B]">Skill: OCR Worker • Acme Legal Tech</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col max-w-lg">
+<span class="font-medium text-xs text-[#DC2626] truncate log-message-text">OCR timeout excedido (TesseractWorker exceeded 30000ms deadline)</span>
+<span class="font-mono text-[11px] text-[#64748B] truncate">POST /api/v2/document/ocr/extract_clauses [Worker: node-gpu-04]</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap status-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30 severity-tag">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span>
+                    Crítico P0
+                  </span>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30 log-code-badge">
+                    504 Timeout
+                  </span>
+</td>
+<!-- Columna Acciones con Dropdown [CA-26] -->
+<td class="py-4 px-5 text-right whitespace-nowrap relative">
+<div class="inline-block text-left relative dropdown-container">
+<button class="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] flex items-center justify-center transition-colors shadow-sm ml-auto dropdown-toggle-btn" onclick="toggleRowDropdown(event, 'dropdown-TRACE-1094')" title="Opciones (CA-26)">
+<span class="material-symbols-outlined text-[20px] text-[#0F172A]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-white border border-[#E2E8F0] shadow-xl z-30 py-1.5 actions-dropdown" id="dropdown-TRACE-1094">
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#0F172A] hover:bg-[#F8FAFC] transition-colors text-left" onclick="openTraceModal('TRACE-1094'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#6366F1]">terminal</span>
+<span>Ver detalle</span>
+</button>
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#059669] hover:bg-[#ECFDF5] transition-colors text-left resolve-btn" onclick="toggleResolveStatus('TRACE-1094'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#10B981]">check_circle</span>
+<span class="resolve-btn-text">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Whisper v3 STT (Alto P1 - 422 Unprocessable) -->
+<tr class="hover:bg-[#F8FAFC] transition-all group" data-trace-key="TRACE-1091" id="row-TRACE-1091">
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-xs text-[#0F172A]">14:38:05 UTC</span>
+<span class="font-mono text-[11px] text-[#6366F1]">trc_1091_wh_stt</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/20 flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] flex items-center gap-1.5">
+                        Whisper v3 STT
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]">v3.0</span>
+</div>
+<div class="text-xs text-[#64748B]">Skill: Transcriptor • Soporte NexaCorp</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col max-w-lg">
+<span class="font-medium text-xs text-[#D97706] truncate log-message-text">Audio stream corrupted / payload malformed (sampling rate 8kHz unsupported)</span>
+<span class="font-mono text-[11px] text-[#64748B] truncate">WebSocket /ws/v1/voice/stream [Codec: audio/webm;rate=8000]</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap status-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30 severity-tag">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+                    Alto P1
+                  </span>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30 log-code-badge">
+                    422 Unprocessable
+                  </span>
+</td>
+<!-- Columna Acciones con Dropdown [CA-26] -->
+<td class="py-4 px-5 text-right whitespace-nowrap relative">
+<div class="inline-block text-left relative dropdown-container">
+<button class="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] flex items-center justify-center transition-colors shadow-sm ml-auto dropdown-toggle-btn" onclick="toggleRowDropdown(event, 'dropdown-TRACE-1091')" title="Opciones (CA-26)">
+<span class="material-symbols-outlined text-[20px] text-[#0F172A]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-white border border-[#E2E8F0] shadow-xl z-30 py-1.5 actions-dropdown" id="dropdown-TRACE-1091">
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#0F172A] hover:bg-[#F8FAFC] transition-colors text-left" onclick="openTraceModal('TRACE-1091'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#6366F1]">terminal</span>
+<span>Ver detalle</span>
+</button>
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#059669] hover:bg-[#ECFDF5] transition-colors text-left resolve-btn" onclick="toggleResolveStatus('TRACE-1091'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#10B981]">check_circle</span>
+<span class="resolve-btn-text">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Fila 3: SalesLead Hunter (Medio P2 - 429 RateLimit) -->
+<tr class="hover:bg-[#F8FAFC] transition-all group" data-trace-key="TRACE-1087" id="row-TRACE-1087">
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-xs text-[#0F172A]">14:15:40 UTC</span>
+<span class="font-mono text-[11px] text-[#6366F1]">trc_1087_sl_crm</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#EEF2FF] text-[#4F46E5] border border-[#6366F1]/20 flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[20px]">radar</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] flex items-center gap-1.5">
+                        SalesLead Hunter
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]">v3.0</span>
+</div>
+<div class="text-xs text-[#64748B]">Skill: CRM Sync • SaaS Growth Lab</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col max-w-lg">
+<span class="font-medium text-xs text-[#4F46E5] truncate log-message-text">CRM Webhook rate limit exceeded (HubSpot API 429 Too Many Requests)</span>
+<span class="font-mono text-[11px] text-[#64748B] truncate">PUT api.hubapi.com/crm/v3/objects/contacts/batch/archive [Retry-After: 120s]</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap status-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#EEF2FF] text-[#4F46E5] border border-[#6366F1]/30 severity-tag">
+<span class="w-1.5 h-1.5 rounded-full bg-[#6366F1]"></span>
+                    Medio P2
+                  </span>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#EEF2FF] text-[#4F46E5] border border-[#6366F1]/20 log-code-badge">
+                    429 RateLimit
+                  </span>
+</td>
+<!-- Columna Acciones con Dropdown [CA-26] -->
+<td class="py-4 px-5 text-right whitespace-nowrap relative">
+<div class="inline-block text-left relative dropdown-container">
+<button class="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] flex items-center justify-center transition-colors shadow-sm ml-auto dropdown-toggle-btn" onclick="toggleRowDropdown(event, 'dropdown-TRACE-1087')" title="Opciones (CA-26)">
+<span class="material-symbols-outlined text-[20px] text-[#0F172A]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-white border border-[#E2E8F0] shadow-xl z-30 py-1.5 actions-dropdown" id="dropdown-TRACE-1087">
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#0F172A] hover:bg-[#F8FAFC] transition-colors text-left" onclick="openTraceModal('TRACE-1087'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#6366F1]">terminal</span>
+<span>Ver detalle</span>
+</button>
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#059669] hover:bg-[#ECFDF5] transition-colors text-left resolve-btn" onclick="toggleResolveStatus('TRACE-1087'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#10B981]">check_circle</span>
+<span class="resolve-btn-text">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Fila 4: Nexus Support v2 (Alto P1 - 500 Internal) -->
+<tr class="hover:bg-[#F8FAFC] transition-all group" data-trace-key="TRACE-1081" id="row-TRACE-1081">
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-xs text-[#0F172A]">13:50:11 UTC</span>
+<span class="font-mono text-[11px] text-[#6366F1]">trc_1081_nx_chroma</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/20 flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] flex items-center gap-1.5">
+                        Nexus Support v2
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]">v2.4</span>
+</div>
+<div class="text-xs text-[#64748B]">Skill: Vector Search • NexaCorp Enterprise</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col max-w-lg">
+<span class="font-medium text-xs text-[#D97706] truncate log-message-text">Vector search timeout in ChromaDB cluster node-3 (RPC error code 14)</span>
+<span class="font-mono text-[11px] text-[#64748B] truncate">chromadb.client.query(collection="kb_enterprise", n_results=10)</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap status-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30 severity-tag">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+                    Alto P1
+                  </span>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30 log-code-badge">
+                    500 Internal
+                  </span>
+</td>
+<!-- Columna Acciones con Dropdown [CA-26] -->
+<td class="py-4 px-5 text-right whitespace-nowrap relative">
+<div class="inline-block text-left relative dropdown-container">
+<button class="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] flex items-center justify-center transition-colors shadow-sm ml-auto dropdown-toggle-btn" onclick="toggleRowDropdown(event, 'dropdown-TRACE-1081')" title="Opciones (CA-26)">
+<span class="material-symbols-outlined text-[20px] text-[#0F172A]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-white border border-[#E2E8F0] shadow-xl z-30 py-1.5 actions-dropdown" id="dropdown-TRACE-1081">
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#0F172A] hover:bg-[#F8FAFC] transition-colors text-left" onclick="openTraceModal('TRACE-1081'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#6366F1]">terminal</span>
+<span>Ver detalle</span>
+</button>
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#059669] hover:bg-[#ECFDF5] transition-colors text-left resolve-btn" onclick="toggleResolveStatus('TRACE-1081'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#10B981]">check_circle</span>
+<span class="resolve-btn-text">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Fila 5: FinanceAnalyzer Pro (Crítico P0 - OOM-Killed) -->
+<tr class="hover:bg-[#F8FAFC] transition-all group bg-[#FEF2F2]/40" data-trace-key="TRACE-1076" id="row-TRACE-1076">
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-medium text-xs text-[#0F172A]">12:20:00 UTC</span>
+<span class="font-mono text-[11px] text-[#6366F1]">trc_1076_fa_oom</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/20 flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] flex items-center gap-1.5">
+                        FinanceAnalyzer Pro
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]">v4.1</span>
+</div>
+<div class="text-xs text-[#64748B]">Skill: Auditoría Métricas • FinTech Sol</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col max-w-lg">
+<span class="font-medium text-xs text-[#DC2626] truncate log-message-text">Sandbox gVisor memory limit reached (1024MB allocated)</span>
+<span class="font-mono text-[11px] text-[#64748B] truncate">Kernel: cgroup out-of-memory killed container #run_finance_9912</span>
+</div>
+</td>
+<td class="py-4 px-5 whitespace-nowrap status-cell">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30 severity-tag">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EF4444]"></span>
+                    Crítico P0
+                  </span>
+</td>
+<td class="py-4 px-5 whitespace-nowrap">
+<span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30 log-code-badge">
+                    OOM-Killed
+                  </span>
+</td>
+<!-- Columna Acciones con Dropdown [CA-26] -->
+<td class="py-4 px-5 text-right whitespace-nowrap relative">
+<div class="inline-block text-left relative dropdown-container">
+<button class="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] flex items-center justify-center transition-colors shadow-sm ml-auto dropdown-toggle-btn" onclick="toggleRowDropdown(event, 'dropdown-TRACE-1076')" title="Opciones (CA-26)">
+<span class="material-symbols-outlined text-[20px] text-[#0F172A]">more_vert</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-white border border-[#E2E8F0] shadow-xl z-30 py-1.5 actions-dropdown" id="dropdown-TRACE-1076">
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#0F172A] hover:bg-[#F8FAFC] transition-colors text-left" onclick="openTraceModal('TRACE-1076'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#6366F1]">terminal</span>
+<span>Ver detalle</span>
+</button>
+<button class="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium text-[#059669] hover:bg-[#ECFDF5] transition-colors text-left resolve-btn" onclick="toggleResolveStatus('TRACE-1076'); closeAllDropdowns();">
+<span class="material-symbols-outlined text-[17px] text-[#10B981]">check_circle</span>
+<span class="resolve-btn-text">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación Elegante (Light Mode Oficial) -->
+<div class="p-4 border-t border-[#E2E8F0] bg-white flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#64748B]">
+<div id="tableCounterText">
+            Mostrando <span class="font-semibold text-[#0F172A]">1 a 5</span> de <span class="font-semibold text-[#0F172A]">248</span> errores
+          </div>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white font-medium text-[#64748B] hover:bg-[#F1F5F9] transition-colors disabled:opacity-50" disabled="">
+              Anterior
+            </button>
+<button class="w-8 h-8 rounded-lg bg-[#6366F1] text-white font-semibold flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] font-medium transition-colors flex items-center justify-center text-[#0F172A]">2</button>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] font-medium transition-colors flex items-center justify-center text-[#0F172A]">3</button>
+<span class="px-1 text-[#64748B]">...</span>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] font-medium transition-colors flex items-center justify-center text-[#0F172A]">50</button>
+<button class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] bg-white font-medium text-[#0F172A] hover:bg-[#F1F5F9] transition-colors">
+              Siguiente
+            </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Interactivo: Stack Trace & Detalle de Excepción Completo [CA-26] Light Mode -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="stackTraceModal">
+<div class="relative w-full max-w-4xl bg-white border border-[#E2E8F0] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-[#F8FAFC] border-b border-[#E2E8F0] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/20 flex items-center justify-center font-bold" id="modalSeverityIconBox">
+<span class="material-symbols-outlined text-[20px]" id="modalHeaderIcon">bug_report</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-bold text-[#0F172A]" id="modalTraceTitle">OCR timeout excedido (504 Gateway Timeout)</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30" id="modalSeverityBadge">CRÍTICO P0</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#F1F5F9] text-[#64748B] border border-[#E2E8F0]" id="modalErrorCodeBadge">HTTP 504</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-[#64748B] mt-0.5">
+<span>Trace ID:</span>
+<span class="font-mono text-[#6366F1] font-semibold" id="modalTraceId">trc_1094_dp_ocr</span>
+<span>•</span>
+<span id="modalTimestamp">2025-05-18 14:42:19 UTC</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] flex items-center justify-center transition-colors" onclick="closeTraceModal()" title="Cerrar (Esc)">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 overflow-y-auto space-y-5 text-sm bg-white">
+<!-- Metadata Contextual Ampliada (gVisor runtime, Agente, Skills, Entorno) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+<div>
+<span class="text-[10px] font-semibold text-[#64748B] uppercase tracking-wider block">Agente / Entorno</span>
+<span class="font-semibold text-xs text-[#0F172A] mt-0.5 block" id="modalAgentName">DocParser Core (v2.1)</span>
+<span class="text-[11px] text-[#6366F1] font-mono" id="modalClusterNode">Cluster: prod-gpu-node-04</span>
+</div>
+<div>
+<span class="text-[10px] font-semibold text-[#64748B] uppercase tracking-wider block">Skill / Componente &amp; Runtime</span>
+<span class="font-semibold text-xs text-[#0F172A] mt-0.5 block" id="modalSkillName">skill_tesseract_ocr_worker</span>
+<span class="text-[11px] text-[#059669] font-mono font-medium" id="modalRuntime">Runtime: gVisor runsc (Python 3.11-cuda)</span>
+</div>
+<div>
+<span class="text-[10px] font-semibold text-[#64748B] uppercase tracking-wider block">Cliente / Organización</span>
+<span class="font-semibold text-xs text-[#0F172A] mt-0.5 block" id="modalTenant">Acme Legal Tech</span>
+<span class="text-[11px] text-[#DC2626] font-medium" id="modalSlaImpact">SLA Impact: 1 SLA Breached</span>
+</div>
+</div>
+<!-- Variables de Entorno Sanitizadas -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Variables de Entorno Sandbox (Sanitizadas)</span>
+<span class="text-[10px] font-mono text-[#64748B]">cgroup isolation: active</span>
+</div>
+<div class="p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] font-mono text-[11px] text-[#64748B] grid grid-cols-1 md:grid-cols-2 gap-2" id="modalEnvVars">
+<div><span class="text-[#6366F1] font-semibold">AGENT_ENV</span>=<span class="text-[#0F172A]">production</span></div>
+<div><span class="text-[#6366F1] font-semibold">GVISOR_MEMORY_MAX</span>=<span class="text-[#0F172A]">1024MB</span></div>
+<div><span class="text-[#6366F1] font-semibold">EXECUTION_TIMEOUT_MS</span>=<span class="text-[#0F172A]">30000</span></div>
+<div><span class="text-[#6366F1] font-semibold">CUDA_VISIBLE_DEVICES</span>=<span class="text-[#0F172A]">0,1</span></div>
+</div>
+</div>
+<!-- Payload de Entrada -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Payload de Entrada (Inbound Payload)</span>
+<button class="inline-flex items-center gap-1 text-xs text-[#6366F1] font-medium hover:underline" onclick="copyCode('modalPayloadJson')">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+              Copiar Payload
+            </button>
+</div>
+<div class="p-3.5 rounded-xl bg-[#0F172A] border border-[#1E293B] overflow-x-auto shadow-inner">
+<pre class="font-mono text-xs text-[#38BDF8] leading-relaxed" id="modalPayloadJson">{
+  "document_id": "doc_9941a87b2e1",
+  "file_type": "application/pdf",
+  "page_count": 84,
+  "dpi": 600,
+  "options": {
+    "engine": "tesseract_v5_lstm",
+    "language": "spa+eng",
+    "detect_tables": true
+  },
+  "timeout_threshold_ms": 30000
+}</pre>
+</div>
+</div>
+<!-- Stack Trace Monospace con Formato Datadog/Sentry -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Stack Trace de Excepción</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] text-[#64748B]" id="modalStackTraceLocation">Line 204 in worker.py</span>
+</div>
+<button class="inline-flex items-center gap-1 text-xs text-[#6366F1] font-medium hover:underline" onclick="copyCode('modalStackTrace')">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+              Copiar Stack Trace
+            </button>
+</div>
+<div class="p-3.5 rounded-xl bg-[#0F172A] border border-[#1E293B] overflow-x-auto shadow-inner">
+<pre class="font-mono text-xs text-[#F87171] leading-relaxed select-all" id="modalStackTrace">nexai.core.exceptions.SkillExecutionTimeout: HTTP 504 Gateway Timeout: Worker execution exceeded max quota deadline
+  at nexai.skills.ocr.tesseract_worker.process_pages (skills/ocr/tesseract_worker.py:204)
+  at nexai.runtime.pipeline.execute_stage (runtime/pipeline.py:112)
+  at nexai.engine.orchestrator.dispatch_job (engine/orchestrator.py:488)
+  at async aiohttp.server._handle_request (aiohttp/server.py:89)
+
+Caused by: asyncio.exceptions.TimeoutError: 30000ms elapsed without frame synchronization
+  Task &lt;Task-19821&gt; was cancelled due to timeout policy: 'strict_sla_kill'
+
+Context State:
+  agent_id="agt-docparser-21"
+  run_id="run_9941a87b_01"
+  memory_used="892MB / 1024MB"
+  last_checkpoint="page_41_extracted"</pre>
+</div>
+</div>
+</div>
+<!-- Modal Footer con Acción Marcar como Resuelto y Cerrar [CA-26, CA-27] -->
+<div class="px-6 py-4 bg-[#F8FAFC] border-t border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-3">
+<div class="flex items-center gap-2 text-xs text-[#64748B]">
+<span class="material-symbols-outlined text-[18px] text-[#10B981]">security</span>
+<span id="modalFooterNote">Trazas capturadas por el colector OpenTelemetry v1.28</span>
+</div>
+<div class="flex items-center gap-2.5">
+<button class="px-4 py-2 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-[#0F172A] text-sm font-medium transition-colors" onclick="closeTraceModal()">
+            Cerrar
+          </button>
+<button class="px-4 py-2 rounded-lg bg-[#10B981] hover:bg-[#059669] text-white text-sm font-medium transition-all shadow-sm active:scale-95 flex items-center gap-1.5" id="modalResolveBtn" onclick="resolveFromModal()">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span id="modalResolveBtnText">Marcar como resuelto</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Configurar Alertas Light Mode -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="alertConfigModal">
+<div class="relative w-full max-w-xl bg-white border border-[#E2E8F0] rounded-2xl shadow-2xl overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+<div class="px-6 py-4 bg-[#F8FAFC] border-b border-[#E2E8F0] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#EEF2FF] text-[#6366F1] flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-[#0F172A]">Configuración de Alertas &amp; Notificaciones</h3>
+<span class="text-xs text-[#64748B]">Umbrales de fallos, canales de Slack / PagerDuty y webhooks</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] flex items-center justify-center transition-colors" onclick="closeAlertConfigModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-6 space-y-4 text-sm bg-white">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-1.5">Umbral de Disparo P0 (Fallos consecutivos)</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option selected="" value="3">3 fallos en menos de 2 minutos (Inmediato)</option>
+<option value="5">5 fallos en menos de 5 minutos</option>
+<option value="10">10 fallos sostenidos</option>
+</select>
+</div>
+<div class="space-y-3 p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-xs text-[#0F172A]">Webhook de PagerDuty / OpsGenie</div>
+<div class="text-[11px] text-[#64748B]">Escalado en guardia 24/7 para errores P0 críticos.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-[#CBD5E1] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+</div>
+<div class="border-t border-[#E2E8F0]"></div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-xs text-[#0F172A]">Canal Slack #alerts-incidents</div>
+<div class="text-[11px] text-[#64748B]">Envío automático con stack trace y deep link de depuración.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-[#CBD5E1] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-end gap-3">
+<button class="px-4 py-2 rounded-lg border border-[#E2E8F0] bg-white hover:bg-[#F1F5F9] text-[#0F172A] text-sm font-medium transition-colors" onclick="closeAlertConfigModal()">
+          Cancelar
+        </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="saveAlertRules()">
+          Guardar Reglas
+        </button>
+</div>
+</div>
+</div>
+<!-- Toast de Notificación Light Mode -->
+<div class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white border border-[#E2E8F0] text-[#0F172A] shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="toastBox">
+<span class="material-symbols-outlined text-[20px] text-[#10B981]" id="toastIcon">check_circle</span>
+<span class="text-xs font-medium" id="toastMessage">Acción completada</span>
+</div>
+<script>
+    // Mock Data para el detalle del modal de trazas completo [CA-26]
+    const mockTraces = {
+      'TRACE-1094': {
+        title: 'OCR timeout excedido (504 Gateway Timeout)',
+        severity: 'CRÍTICO P0',
+        errorCode: 'HTTP 504',
+        badgeClass: 'bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30',
+        traceId: 'trc_1094_dp_ocr',
+        timestamp: '2025-05-18 14:42:19 UTC',
+        agent: 'DocParser Core (v2.1)',
+        clusterNode: 'Cluster: prod-gpu-node-04',
+        skill: 'skill_tesseract_ocr_worker',
+        runtime: 'Runtime: gVisor runsc (Python 3.11-cuda)',
+        tenant: 'Acme Legal Tech',
+        sla: 'SLA Impact: 1 SLA Breached',
+        envVars: [
+          { k: 'AGENT_ENV', v: 'production' },
+          { k: 'GVISOR_MEMORY_MAX', v: '1024MB' },
+          { k: 'EXECUTION_TIMEOUT_MS', v: '30000' },
+          { k: 'CUDA_VISIBLE_DEVICES', v: '0,1' }
+        ],
+        payload: `{\n  "document_id": "doc_9941a87b2e1",\n  "file_type": "application/pdf",\n  "page_count": 84,\n  "dpi": 600,\n  "options": {\n    "engine": "tesseract_v5_lstm",\n    "language": "spa+eng",\n    "detect_tables": true\n  },\n  "timeout_threshold_ms": 30000\n}`,
+        location: 'Line 204 in worker.py',
+        stack: `nexai.core.exceptions.SkillExecutionTimeout: HTTP 504 Gateway Timeout: Worker execution exceeded max quota deadline\n  at nexai.skills.ocr.tesseract_worker.process_pages (skills/ocr/tesseract_worker.py:204)\n  at nexai.runtime.pipeline.execute_stage (runtime/pipeline.py:112)\n  at nexai.engine.orchestrator.dispatch_job (engine/orchestrator.py:488)\n  at async aiohttp.server._handle_request (aiohttp/server.py:89)\n\nCaused by: asyncio.exceptions.TimeoutError: 30000ms elapsed without frame synchronization\n  Task <Task-19821> was cancelled due to timeout policy: 'strict_sla_kill'\n\nContext State:\n  agent_id="agt-docparser-21"\n  run_id="run_9941a87b_01"\n  memory_used="892MB / 1024MB"\n  last_checkpoint="page_41_extracted"`
+      },
+      'TRACE-1091': {
+        title: 'Audio stream corrupted / payload malformed',
+        severity: 'ALTO P1',
+        errorCode: 'HTTP 422',
+        badgeClass: 'bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30',
+        traceId: 'trc_1091_wh_stt',
+        timestamp: '2025-05-18 14:38:05 UTC',
+        agent: 'Whisper v3 STT (v3.0)',
+        clusterNode: 'Cluster: prod-audio-worker-02',
+        skill: 'skill_whisper_transcriber_async',
+        runtime: 'Runtime: gVisor runsc (Python 3.10-onnx)',
+        tenant: 'Soporte NexaCorp',
+        sla: 'SLA Impact: Degradación menor',
+        envVars: [
+          { k: 'AGENT_ENV', v: 'production' },
+          { k: 'WHISPER_MODEL', v: 'whisper-large-v3' },
+          { k: 'EXPECTED_SAMPLE_RATE', v: '16000' },
+          { k: 'AUDIO_CHUNK_SEC', v: '30' }
+        ],
+        payload: `{\n  "stream_id": "strm_voice_7741",\n  "codec": "audio/webm",\n  "sample_rate": 8000,\n  "channels": 1,\n  "bitrate_kbps": 32\n}`,
+        location: 'Line 58 in decoder.py',
+        stack: `nexai.skills.whisper.AudioStreamError: 422 Unprocessable Entity: Unsupported sample_rate 8000Hz. Minimum 16000Hz required for Whisper Large-v3 model.\n  at nexai.skills.whisper.decoder.validate_headers (decoder.py:58)\n  at nexai.runtime.audio_gateway.on_message (gateway.py:144)\n  at WebSocketServer.handle_frame (server.py:219)`
+      },
+      'TRACE-1087': {
+        title: 'CRM Webhook rate limit exceeded',
+        severity: 'MEDIO P2',
+        errorCode: 'HTTP 429',
+        badgeClass: 'bg-[#EEF2FF] text-[#4F46E5] border border-[#6366F1]/30',
+        traceId: 'trc_1087_sl_crm',
+        timestamp: '2025-05-18 14:15:40 UTC',
+        agent: 'SalesLead Hunter (v3.0)',
+        clusterNode: 'Cluster: prod-integration-01',
+        skill: 'skill_hubspot_crm_sync',
+        runtime: 'Runtime: Node.js 20 LTS (Sandbox)',
+        tenant: 'SaaS Growth Lab',
+        sla: 'SLA Impact: Cola en retry queue',
+        envVars: [
+          { k: 'INTEGRATION_TARGET', v: 'hubspot-api-v3' },
+          { k: 'BURST_LIMIT_PER_SEC', v: '10' },
+          { k: 'CIRCUIT_BREAKER', v: 'ENABLED' }
+        ],
+        payload: `{\n  "integration": "hubspot",\n  "endpoint": "/crm/v3/objects/contacts/batch/archive",\n  "batch_size": 250,\n  "retry_attempts": 3\n}`,
+        location: 'Line 92 in client.py',
+        stack: `nexai.integrations.hubspot.RateLimitExceeded: HTTP 429 Too Many Requests: Monthly tier daily call limit reached.\n  X-HubSpot-RateLimit-Daily-Remaining: 0\n  Retry-After: 120s\n  at nexai.integrations.client.request (client.py:92)\n  at nexai.skills.crm.sync_batch (sync.py:145)`
+      },
+      'TRACE-1081': {
+        title: 'Vector search timeout in ChromaDB cluster node-3',
+        severity: 'ALTO P1',
+        errorCode: 'HTTP 500',
+        badgeClass: 'bg-[#FFFBEB] text-[#D97706] border border-[#F59E0B]/30',
+        traceId: 'trc_1081_nx_chroma',
+        timestamp: '2025-05-18 13:50:11 UTC',
+        agent: 'Nexus Support v2 (v2.4)',
+        clusterNode: 'Cluster: prod-vector-db-03',
+        skill: 'skill_chromadb_retriever',
+        runtime: 'Runtime: gVisor runsc (Python 3.11)',
+        tenant: 'NexaCorp Enterprise',
+        sla: 'SLA Impact: Rerouted to fallback node',
+        envVars: [
+          { k: 'CHROMA_CLUSTER_NODES', v: 'node-1,node-2,node-3' },
+          { k: 'EMBEDDING_DIMENSION', v: '1536' },
+          { k: 'RPC_TIMEOUT_MS', v: '5000' }
+        ],
+        payload: `{\n  "collection": "kb_enterprise",\n  "query_embedding_dim": 1536,\n  "n_results": 10,\n  "where_clause": { "org_id": "nexacorp" }\n}`,
+        location: 'Line 314 in chroma.py',
+        stack: `chromadb.errors.ChromaRPCException: RPC error code 14 (Unavailable): Connection reset by peer\n  Node chromadb-cluster-node-3 is unreachable or undergoing compaction.\n  at chromadb.client.query (chroma.py:314)\n  at nexai.skills.rag.retrieve_context (rag.py:88)`
+      },
+      'TRACE-1076': {
+        title: 'Sandbox gVisor memory limit reached (1024MB allocated)',
+        severity: 'CRÍTICO P0',
+        errorCode: 'OOM-Killed',
+        badgeClass: 'bg-[#FEF2F2] text-[#DC2626] border border-[#EF4444]/30',
+        traceId: 'trc_1076_fa_oom',
+        timestamp: '2025-05-18 12:20:00 UTC',
+        agent: 'FinanceAnalyzer Pro (v4.1)',
+        clusterNode: 'Cluster: prod-worker-mem-09',
+        skill: 'skill_finance_metric_auditor',
+        runtime: 'Runtime: gVisor (runsc kernel strict sandbox)',
+        tenant: 'FinTech Sol',
+        sla: 'SLA Impact: Container Terminated',
+        envVars: [
+          { k: 'GVISOR_MEMORY_MAX', v: '1024MB' },
+          { k: 'CGROUP_OOM_POLICY', v: 'SIGKILL' },
+          { k: 'COMPUTE_ENGINE', v: 'numpy_vectorized' }
+        ],
+        payload: `{\n  "analysis_job_id": "job_balance_8819",\n  "dataset_size_mb": 412,\n  "matrix_computation": "monte_carlo_var",\n  "iterations": 1000000\n}`,
+        location: 'Kernel SIGKILL at 0x1100cca',
+        stack: `nexai.runtime.sandbox.OOMKilledException: Container exceeded memory limit: 1024MB.\n  Process 4419 (python3) invoked oom-killer: gfp_mask=0x1100cca(GFP_HIGHUSER_MOVABLE), order=0\n  Task terminated with SIGKILL by Linux kernel cgroup.\n  Worker node: prod-worker-mem-09 (swap=disabled)`
+      }
+    };
+
+    // Estado de filas resueltas
+    const resolvedRows = new Set();
+    let currentOpenTraceKey = 'TRACE-1094';
+
+    // Manejo de Dropdown [CA-26]
+    function toggleRowDropdown(e, dropdownId) {
+      e.stopPropagation();
+      const dropdown = document.getElementById(dropdownId);
+      const isAlreadyOpen = !dropdown.classList.contains('hidden');
+
+      closeAllDropdowns();
+
+      if (!isAlreadyOpen) {
+        dropdown.classList.remove('hidden');
+      }
+    }
+
+    function closeAllDropdowns() {
+      document.querySelectorAll('.actions-dropdown').forEach(d => {
+        d.classList.add('hidden');
+      });
+    }
+
+    // Cerrar dropdown al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown-container')) {
+        closeAllDropdowns();
+      }
+    });
+
+    // Requisito [CA-27]: Marcar como resuelto / Alternar
+    function toggleResolveStatus(traceKey) {
+      const row = document.getElementById(`row-${traceKey}`);
+      if (!row) return;
+
+      const isResolved = resolvedRows.has(traceKey);
+      const dropdown = document.getElementById(`dropdown-${traceKey}`);
+      const resolveBtnText = dropdown ? dropdown.querySelector('.resolve-btn-text') : null;
+      const statusCell = row.querySelector('.status-cell');
+
+      if (isResolved) {
+        // Desmarcar (Reabrir)
+        resolvedRows.delete(traceKey);
+        row.classList.remove('row-resolved');
+        
+        const data = mockTraces[traceKey];
+        if (data && statusCell) {
+          statusCell.innerHTML = `
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${data.badgeClass} severity-tag">
+              <span class="w-1.5 h-1.5 rounded-full ${data.severity.includes('P0') ? 'bg-[#EF4444]' : (data.severity.includes('P1') ? 'bg-[#F59E0B]' : 'bg-[#6366F1]')}"></span>
+              ${data.severity}
+            </span>
+          `;
+        }
+        if (resolveBtnText) resolveBtnText.innerText = 'Marcar como resuelto';
+        showToast(`Incidente ${traceKey} reabierto.`);
+      } else {
+        // [CA-27] Marcar como resuelto: cambio visual inequívoco
+        resolvedRows.add(traceKey);
+        row.classList.add('row-resolved');
+
+        if (statusCell) {
+          statusCell.innerHTML = `
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#ECFDF5] text-[#059669] border border-[#10B981]/40">
+              <span class="material-symbols-outlined text-[14px] text-[#10B981]">check_circle</span>
+              Resuelto
+            </span>
+          `;
+        }
+        if (resolveBtnText) resolveBtnText.innerText = 'Reabrir incidente';
+        showToast(`✓ Error ${traceKey} marcado como resuelto satisfactoriamente.`);
+      }
+
+      updateResolvedCounterUI();
+      updateModalResolveButton(traceKey);
+    }
+
+    function updateResolvedCounterUI() {
+      const p0Count = document.getElementById('kpiCriticalP0');
+      if (p0Count) {
+        const p0Resolved = Array.from(resolvedRows).filter(k => k === 'TRACE-1094' || k === 'TRACE-1076').length;
+        p0Count.innerText = Math.max(0, 4 - p0Resolved);
+      }
+    }
+
+    // Modal de Trazas [CA-26]
+    function openTraceModal(traceKey) {
+      currentOpenTraceKey = traceKey;
+      const data = mockTraces[traceKey] || mockTraces['TRACE-1094'];
+
+      document.getElementById('modalTraceTitle').innerText = data.title;
+      document.getElementById('modalSeverityBadge').innerText = data.severity;
+      document.getElementById('modalSeverityBadge').className = `px-2 py-0.5 rounded text-[10px] font-mono font-bold ${data.badgeClass}`;
+      document.getElementById('modalErrorCodeBadge').innerText = data.errorCode;
+      document.getElementById('modalTraceId').innerText = data.traceId;
+      document.getElementById('modalTimestamp').innerText = data.timestamp;
+      document.getElementById('modalAgentName').innerText = data.agent;
+      document.getElementById('modalClusterNode').innerText = data.clusterNode;
+      document.getElementById('modalSkillName').innerText = data.skill;
+      document.getElementById('modalRuntime').innerText = data.runtime;
+      document.getElementById('modalTenant').innerText = data.tenant;
+      document.getElementById('modalSlaImpact').innerText = data.sla;
+      document.getElementById('modalStackTraceLocation').innerText = data.location;
+      document.getElementById('modalPayloadJson').innerText = data.payload;
+      document.getElementById('modalStackTrace').innerText = data.stack;
+
+      const envContainer = document.getElementById('modalEnvVars');
+      if (envContainer && data.envVars) {
+        envContainer.innerHTML = data.envVars.map(v => 
+          `<div><span class="text-[#6366F1] font-semibold">${v.k}</span>=<span class="text-[#0F172A]">${v.v}</span></div>`
+        ).join('');
+      }
+
+      updateModalResolveButton(traceKey);
+
+      const modal = document.getElementById('stackTraceModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function updateModalResolveButton(traceKey) {
+      const btn = document.getElementById('modalResolveBtn');
+      const text = document.getElementById('modalResolveBtnText');
+      if (!btn || !text) return;
+
+      const isResolved = resolvedRows.has(traceKey);
+      if (isResolved) {
+        text.innerText = 'Reabrir Incidente';
+        btn.className = "px-4 py-2 rounded-lg bg-[#64748B] hover:bg-[#475569] text-white text-sm font-medium transition-all shadow-sm active:scale-95 flex items-center gap-1.5";
+      } else {
+        text.innerText = 'Marcar como resuelto';
+        btn.className = "px-4 py-2 rounded-lg bg-[#10B981] hover:bg-[#059669] text-white text-sm font-medium transition-all shadow-sm active:scale-95 flex items-center gap-1.5";
+      }
+    }
+
+    function resolveFromModal() {
+      toggleResolveStatus(currentOpenTraceKey);
+      closeTraceModal();
+    }
+
+    function closeTraceModal() {
+      const modal = document.getElementById('stackTraceModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    function openAlertConfigModal() {
+      const modal = document.getElementById('alertConfigModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+      }, 10);
+    }
+
+    function closeAlertConfigModal() {
+      const modal = document.getElementById('alertConfigModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById('toastBox');
+      const text = document.getElementById('toastMessage');
+      const icon = document.getElementById('toastIcon');
+
+      text.innerText = message;
+      icon.innerText = isSuccess ? 'check_circle' : 'error';
+      icon.className = `material-symbols-outlined text-[20px] ${isSuccess ? 'text-[#10B981]' : 'text-[#EF4444]'}`;
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3000);
+    }
+
+    function copyCode(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copiado al portapapeles con éxito');
+      });
+    }
+
+    function exportLogs() {
+      showToast('Generando volcado CSV/JSON de 248 registros...');
+    }
+
+    function saveAlertRules() {
+      closeAlertConfigModal();
+      showToast('Reglas de alerta y canales actualizados.');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeTraceModal();
+        closeAlertConfigModal();
+        closeAllDropdowns();
+      }
+    });
+
+    ['stackTraceModal', 'alertConfigModal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.classList.add('opacity-0');
+            setTimeout(() => this.classList.add('hidden'), 200);
+          }
+        });
+      }
+    });
+
+    const logSearchInput = document.getElementById('logSearchInput');
+    const filterAgent = document.getElementById('filterAgent');
+    const filterCode = document.getElementById('filterCode');
+    const severityPills = document.querySelectorAll('.severity-pill');
+    let currentSeverity = 'all';
+
+    severityPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        severityPills.forEach(p => {
+          p.classList.remove('bg-white', 'text-[#0F172A]', 'shadow-sm');
+          p.classList.add('text-[#64748B]');
+        });
+        pill.classList.add('bg-white', 'text-[#0F172A]', 'shadow-sm');
+        pill.classList.remove('text-[#64748B]');
+        currentSeverity = pill.dataset.severity;
+        filterTable();
+      });
+    });
+
+    function filterTable() {
+      const query = (logSearchInput ? logSearchInput.value : '').toLowerCase();
+      const agentVal = filterAgent ? filterAgent.value : 'all';
+      const codeVal = filterCode ? filterCode.value : 'all';
+      const rows = document.querySelectorAll('#logTableBody tr');
+      let visible = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const matchesQuery = !query || text.includes(query);
+
+        let matchesSeverity = true;
+        if (currentSeverity === 'p0') matchesSeverity = text.includes('crítico') || text.includes('p0');
+        if (currentSeverity === 'p1') matchesSeverity = text.includes('alto') || text.includes('p1');
+        if (currentSeverity === 'p2') matchesSeverity = text.includes('medio') || text.includes('p2');
+
+        let matchesAgent = true;
+        if (agentVal === 'docparser') matchesAgent = text.includes('docparser');
+        if (agentVal === 'whisper') matchesAgent = text.includes('whisper');
+        if (agentVal === 'saleslead') matchesAgent = text.includes('saleslead');
+        if (agentVal === 'nexus') matchesAgent = text.includes('nexus');
+        if (agentVal === 'finance') matchesAgent = text.includes('financeanalyzer');
+
+        let matchesCode = true;
+        if (codeVal === '504') matchesCode = text.includes('504');
+        if (codeVal === '422') matchesCode = text.includes('422');
+        if (codeVal === '429') matchesCode = text.includes('429');
+        if (codeVal === '500') matchesCode = text.includes('500');
+        if (codeVal === 'oom') matchesCode = text.includes('oom');
+
+        if (matchesQuery && matchesSeverity && matchesAgent && matchesCode) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      const counter = document.getElementById('tableCounterText');
+      if (counter) {
+        counter.innerHTML = `Mostrando <span class="font-semibold text-[#0F172A]">1 a ${visible}</span> de <span class="font-semibold text-[#0F172A]">248</span> errores`;
+      }
+    }
+
+    if (logSearchInput) logSearchInput.addEventListener('input', filterTable);
+    if (filterAgent) filterAgent.addEventListener('change', filterTable);
+    if (filterCode) filterCode.addEventListener('change', filterTable);
+
+    const resetBtn = document.getElementById('btnResetFilters');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (logSearchInput) logSearchInput.value = '';
+        if (filterAgent) filterAgent.value = 'all';
+        if (filterCode) filterCode.value = 'all';
+        severityPills[0].click();
+      });
+    }
+  </script>
+</body></html>

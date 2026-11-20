@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo de Skills - AgentHub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#818CF8",
+              primary: "#6366F1",
+              hover: "#4F46E5",
+              accent: "#C7D2FE",
+              light: "#EEF2FF"
+            },
+            canvas: {
+              DEFAULT: "#0B0F19",
+              light: "#F8FAFC",
+              dark: "#0B0F19"
+            },
+            card: {
+              DEFAULT: "#131A2B",
+              light: "#FFFFFF",
+              dark: "#131A2B"
+            },
+            elevated: {
+              DEFAULT: "#1E293B",
+              light: "#F1F5F9",
+              dark: "#1E293B"
+            },
+            border: {
+              DEFAULT: "#293548",
+              light: "#E2E8F0",
+              dark: "#293548"
+            },
+            text: {
+              primary: {
+                DEFAULT: "#F8FAFC",
+                light: "#0F172A",
+                dark: "#F8FAFC"
+              },
+              secondary: {
+                DEFAULT: "#94A3B8",
+                light: "#64748B",
+                dark: "#94A3B8"
+              }
+            },
+            semantic: {
+              success: "#34D399",
+              warning: "#FBBF24",
+              danger: "#F87171"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="bg-[#0B0F19] text-[#F8FAFC] min-h-screen transition-colors duration-200">
+<!-- Sidebar Lateral -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-[#131A2B] border-r border-[#293548] z-50 flex flex-col justify-between transition-colors duration-200">
+<div class="flex flex-col flex-1">
+<!-- Logo Oficial AgentHub (Dark) -->
+<div class="h-16 px-5 flex items-center border-b border-[#293548]">
+<img alt="AgentHub Logo" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrjMLOC10FZ3209L63eJtT5pJ5E5_bzAguJmiHU_fZ3zHAEfZFpOS-EykpxMbpfK5ct1jqepfiHqXHtx79SOTIatV7XUY8EIkI5o2uVYAxlNHMOMLuzVMw7ncXe6y9sLeim_gD7XtVqGGWUA8VCDTqhk-67VPe-V9QW4O8EF9UFY5aKgTkQd2idZicutil90vqN_GIODLeGdrgKhC55vd1iVSXUaD9fwv6v--KhkuWXo-U4uvH275LSQ"/>
+</div>
+<!-- Navigation -->
+<div class="px-3 py-4 flex-1 overflow-y-auto">
+<div class="text-[11px] font-semibold text-[#94A3B8] uppercase tracking-wider px-3 mb-2">
+          Plataforma
+        </div>
+<nav class="space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Dashboard</span>
+</a>
+<!-- Gestión de usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span>Gestión de usuarios</span>
+</a>
+<!-- Gestión de agentes -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Gestión de agentes</span>
+</a>
+<!-- Skills (ACTIVO) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#6366F1] text-white font-medium text-sm shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span>Skills</span>
+</a>
+<!-- Contrataciones -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Contrataciones</span>
+</a>
+<!-- Log de errores -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#94A3B8] hover:bg-[#1E293B] hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+<span>Log de errores</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Footer Sidebar con Badge Status Cluster -->
+<div class="p-4 border-t border-[#293548]">
+<div class="p-3 bg-[#1E293B] rounded-lg border border-[#293548]">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-wider">CLUSTER NEXAI</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34D399] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#34D399]"></span>
+</span>
+</div>
+<div class="font-mono text-xs text-[#F8FAFC] truncate font-medium">v2.4.0-prod-node</div>
+<div class="mt-2 flex items-center justify-between text-xs text-[#94A3B8]">
+<span>Sync Status</span>
+<span class="font-semibold text-[#34D399]">99.98%</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Contenedor Principal (Pl-64 para dejar espacio al sidebar) -->
+<div class="pl-64 flex flex-col min-h-screen bg-[#0B0F19] text-[#F8FAFC]">
+<!-- Header Superior Sticky -->
+<header class="sticky top-0 h-16 bg-[#131A2B] border-b-2 border-[#6366F1] shadow-[0_4px_16px_rgba(99,102,241,0.18)] z-40 px-6 flex items-center justify-between gap-4 transition-colors duration-200">
+<!-- Buscador -->
+<div class="flex items-center flex-1 max-w-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-sm text-[#F8FAFC] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#818CF8] focus:border-transparent transition-all" placeholder="Buscar agentes, modelos, contratos..." type="text"/>
+</div>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-3">
+<!-- Toggle Modo Oscuro/Claro -->
+<button class="w-10 h-10 rounded-lg border border-[#293548] bg-[#131A2B] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="document.documentElement.classList.toggle('dark')" title="Alternar Modo Claro / Oscuro" type="button">
+<span class="material-symbols-outlined text-[20px] text-[#FBBF24]">light_mode</span>
+</button>
+<!-- Notificaciones con badge -->
+<button class="relative w-10 h-10 rounded-lg border border-[#293548] bg-[#131A2B] hover:bg-[#1E293B] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" title="Notificaciones" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#F87171]"></span>
+</button>
+<div class="h-6 w-[1px] bg-[#293548] mx-1"></div>
+<!-- Perfil Usuario -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            AD
+          </div>
+<div class="hidden md:flex flex-col text-left">
+<span class="text-sm font-semibold text-[#F8FAFC] leading-tight">Admin NEXAI</span>
+<span class="text-[10px] font-bold text-[#94A3B8] tracking-wider uppercase">SUPER ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Contenido del Catálogo de Skills -->
+<main class="flex-1 p-6 space-y-6">
+<div class="flex flex-col w-full">
+<!-- 1. Encabezado de Página y Acciones -->
+<header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 border-b border-[#293548]">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-wider">ORQUESTACIÓN</span>
+<span class="text-[#94A3B8] text-xs">/</span>
+<span class="text-[11px] font-bold text-[#818CF8] uppercase tracking-wider">CATÁLOGO DE SKILLS</span>
+</div>
+<h1 class="text-2xl font-bold text-[#F8FAFC] tracking-tight">Catálogo de Skills</h1>
+<p class="text-sm text-[#94A3B8] max-w-3xl">
+        Librería de capacidades modulares, integraciones de API y herramientas ejecutables para agentes de IA autónomos.
+      </p>
+</div>
+<!-- Acciones en Cabecera -->
+<div class="flex items-center gap-3 self-start md:self-auto shrink-0">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#131A2B] border border-[#293548] text-[#F8FAFC] text-sm font-medium shadow-sm hover:bg-[#1E293B] hover:border-[#818CF8]/40 transition-colors active:scale-[0.98]" onclick="triggerExportSkills()" type="button">
+<span class="material-symbols-outlined text-[20px] text-[#94A3B8]">download</span>
+<span>Exportar</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium shadow-sm transition-all active:scale-[0.98]" onclick="openCreateSkillModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>+ Nueva Skill</span>
+</button>
+</div>
+</header>
+<!-- 2. Tarjetas Superiores de Métricas / KPIs -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mt-6 mb-6">
+<!-- Tarjeta 1: Total Skills -->
+<div class="p-5 rounded-xl bg-[#131A2B] border-l-4 border-[#818CF8] border border-[#293548] shadow-sm flex flex-col justify-between transition-all hover:shadow-md hover:border-[#818CF8]/40">
+<div class="flex items-center justify-between pb-2 border-b border-[#1E293B]">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-[#818CF8]/15 text-[#C7D2FE] uppercase">TOTAL SKILLS</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-[#818CF8]/15 text-[#818CF8] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<span class="text-2xl font-bold text-[#F8FAFC]">38</span>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#818CF8]/15 text-[#C7D2FE] font-semibold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+      +4 este mes
+    </span>
+</div>
+<div class="mt-2 text-[#94A3B8] text-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#818CF8]"></span>
+<span>94% activas en clúster prod</span>
+</div>
+</div>
+<!-- Tarjeta 2: Llamadas Activas -->
+<div class="p-5 rounded-xl bg-[#131A2B] border-l-4 border-[#34D399] border border-[#293548] shadow-sm flex flex-col justify-between transition-all hover:shadow-md hover:border-[#34D399]/40">
+<div class="flex items-center justify-between pb-2 border-b border-[#1E293B]">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-[#34D399]/15 text-[#34D399] uppercase">LLAMADAS ACTIVAS (24H)</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-[#34D399]/15 text-[#34D399] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<span class="text-2xl font-bold text-[#F8FAFC]">1.4M</span>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#34D399]/15 text-[#34D399] font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+      +18.4% vs ayer
+    </span>
+</div>
+<div class="mt-2 text-[#94A3B8] text-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#34D399]"></span>
+<span>Pico de 1.9k req/segundo</span>
+</div>
+</div>
+<!-- Tarjeta 3: En Proceso de Test -->
+<div class="p-5 rounded-xl bg-[#131A2B] border-l-4 border-[#FBBF24] border border-[#293548] shadow-sm flex flex-col justify-between transition-all hover:shadow-md hover:border-[#FBBF24]/40">
+<div class="flex items-center justify-between pb-2 border-b border-[#1E293B]">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-[#FBBF24]/15 text-[#FBBF24] uppercase">EN PROCESO DE TEST</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-[#FBBF24]/15 text-[#FBBF24] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hourglass_top</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<span class="text-2xl font-bold text-[#F8FAFC]">3</span>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#FBBF24]/15 text-[#FBBF24] font-semibold">
+      Entorno sandbox
+    </span>
+</div>
+<div class="mt-2 text-[#94A3B8] text-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FBBF24]"></span>
+<span>Validación sintáctica pendiente</span>
+</div>
+</div>
+<!-- Tarjeta 4: Fallos de Integración -->
+<div class="p-5 rounded-xl bg-[#131A2B] border-l-4 border-[#F87171] border border-[#293548] shadow-sm flex flex-col justify-between transition-all hover:shadow-md hover:border-[#F87171]/40">
+<div class="flex items-center justify-between pb-2 border-b border-[#1E293B]">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-[#F87171]/15 text-[#F87171] uppercase">FALLOS DE INTEGRACIÓN</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-[#F87171]/15 text-[#F87171] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+</div>
+</div>
+<div class="mt-3 flex items-baseline justify-between">
+<span class="text-2xl font-bold text-[#F8FAFC]">1</span>
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#F87171]/15 text-[#F87171] font-semibold">
+      Atención requerida
+    </span>
+</div>
+<div class="mt-2 text-[#94A3B8] text-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F87171]"></span>
+<span>Whisper v3 timeout degradado</span>
+</div>
+</div>
+</section>
+<!-- 3. Barra de Control, Búsqueda y Pestañas de Filtrado -->
+<section class="bg-[#131A2B] border border-[#293548] rounded-xl p-4 shadow-sm mb-6 space-y-4">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Input de búsqueda -->
+<div class="relative flex-1 max-w-xl">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#94A3B8] text-[20px]">search</span>
+<input class="w-full pl-11 pr-4 py-2.5 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] placeholder-[#94A3B8] text-sm focus:outline-none focus:ring-2 focus:ring-[#818CF8] transition-all" id="skillSearchInput" placeholder="Filtrar por nombre de skill, tags o endpoint..." type="text"/>
+</div>
+<!-- Selectores de orden y runtime -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-bold text-[#94A3B8] uppercase">RUNTIME:</span>
+<select class="px-3 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#818CF8]" id="runtimeSelect">
+<option value="all">Todos los entornos</option>
+<option value="prod">Producción</option>
+<option value="sandbox">Sandbox</option>
+<option value="staging">Staging</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-bold text-[#94A3B8] uppercase">ORDENAR:</span>
+<select class="px-3 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#818CF8]" id="orderSelect">
+<option selected="" value="most_used">Más utilizadas</option>
+<option value="recent">Recientes</option>
+<option value="success">Mayor éxito</option>
+<option value="alpha">Alfabético</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Pestañas de Categoría (Pills) -->
+<div class="flex flex-wrap items-center gap-2 pt-1 border-t border-[#1E293B]">
+<button class="category-pill active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#6366F1] text-white shadow-sm transition-all" data-category="all" type="button">
+        Todas (38)
+</button>
+<button class="category-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#1E293B] border border-[#293548] text-[#94A3B8] hover:bg-[#293548] hover:text-[#F8FAFC] transition-all" data-category="productividad" type="button">
+        Productividad (14)
+</button>
+<button class="category-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#1E293B] border border-[#293548] text-[#94A3B8] hover:bg-[#293548] hover:text-[#F8FAFC] transition-all" data-category="comunicaciones" type="button">
+        Comunicaciones (9)
+</button>
+<button class="category-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#1E293B] border border-[#293548] text-[#94A3B8] hover:bg-[#293548] hover:text-[#F8FAFC] transition-all" data-category="finanzas" type="button">
+        Finanzas &amp; Datos (8)
+</button>
+<button class="category-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#1E293B] border border-[#293548] text-[#94A3B8] hover:bg-[#293548] hover:text-[#F8FAFC] transition-all" data-category="soporte" type="button">
+        Soporte &amp; Voz (7)
+</button>
+</div>
+</section>
+<!-- 4. Cuadrícula de Tarjetas de Skills (4 Tarjetas Principales) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 w-full" id="skillsGrid">
+<!-- Skill 1: Gestión de Calendario -->
+<div class="skill-card group bg-[#131A2B] rounded-xl shadow-sm hover:shadow-lg flex flex-col justify-between transition-all duration-200 border border-[#293548] hover:border-[#818CF8]/40 overflow-hidden" data-cat="productividad">
+<!-- Card Header Resaltado -->
+<div class="px-5 py-3.5 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-[#131A2B] p-1.5 shadow-sm border border-[#293548] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<img alt="Gestión de Calendario" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADZWO49M0zL8G6i5YASbzjiNs47hEDPDaDby0EHsvkxrO6XMAF4shv-lmlQoek4aqrRBo2Aky0wVpkCq4OUv30si_VDo1HcYH3gJviyJYLGaQjYUdS8ZTkBWCwnC3Ux-Kh1hcXGMhk-pi7Afl78YFVB7eeHUFIqk7DxRl40_n5kNpPvB-i0rk6m2RoXm3Bu5rM10WLcdipAeooZW9hZroSaxmOMEAuoNwEKTiG5dg4moJWuPi4__7LpQ"/>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-2">
+<h3 class="text-base text-[#F8FAFC] font-bold group-hover:text-[#818CF8] transition-colors truncate">Gestión de Calendario</h3>
+<span class="px-1.5 py-0.5 rounded text-[11px] bg-[#818CF8]/15 text-[#C7D2FE] font-mono font-semibold shrink-0">v3.2</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase bg-[#818CF8]/15 text-[#C7D2FE] font-bold tracking-wide">PRODUCTIVIDAD</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<label class="relative inline-flex items-center cursor-pointer" title="Activar/Desactivar Skill">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="toggleSkillMenu('menu-skill-1', event)" title="Más opciones" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-4 flex-1 justify-between">
+<div class="space-y-3">
+<p class="text-sm text-[#94A3B8] line-clamp-2 leading-relaxed">
+          Sincronización bidireccional de agendas con Google Calendar y Outlook, detección de conflictos y agendamiento autónomo de reuniones.
+        </p>
+<div class="p-2.5 rounded-lg bg-[#0B0F19] border border-[#293548] font-mono text-xs text-[#C7D2FE] flex items-center justify-between">
+<span class="truncate font-medium">POST /api/v1/skills/calendar</span>
+<button class="text-[#94A3B8] hover:text-[#818CF8] transition-colors shrink-0 ml-2" onclick="navigator.clipboard.writeText('POST /api/v1/skills/calendar')" title="Copiar Endpoint" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3 bg-[#1E293B] border border-[#293548] rounded-lg p-3">
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Llamadas/Mes</span>
+<span class="text-sm font-semibold text-[#F8FAFC]">480k llamadas</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Tasa de Éxito</span>
+<span class="text-sm font-semibold text-[#34D399]">99.8%</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-[#94A3B8] text-xs">
+<span class="material-symbols-outlined text-[18px] text-[#818CF8]">smart_toy</span>
+<span><strong class="text-[#F8FAFC]">32</strong> agentes vinculados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#34D399]/15 text-[#34D399] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#34D399]"></span>
+            Activo
+          </span>
+<button class="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#293548] text-[#F8FAFC] hover:bg-[#293548] hover:border-[#818CF8]/40 text-xs font-medium transition-all" onclick="openAgentModal('Gestión de Calendario')" type="button">
+            Configurar
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill 2: Lectura y Resumen de Documentos -->
+<div class="skill-card group bg-[#131A2B] rounded-xl shadow-sm hover:shadow-lg flex flex-col justify-between transition-all duration-200 border border-[#293548] hover:border-[#818CF8]/40 overflow-hidden" data-cat="productividad">
+<!-- Card Header Resaltado -->
+<div class="px-5 py-3.5 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-[#131A2B] p-1.5 shadow-sm border border-[#293548] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<img alt="Lectura y Resumen de Documentos" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT2VWKmfwod4zq2Q6ezm_m6NiNjVaqCnaUWLQ1V4Uv7sMrvOzqqlZQ6sRF8G0H7QbAWl1IjFiGL0YywWTPqth9uFH5K_9SJwwlTnqOqvbCWdrd2vurUldPtLUrqPlts-yDCOwQmEseVdIQVo6ORCdVMU3Y5NRVFF7w7ROZD460zfomkODDvJVZCLFgIMGdG8SJp2jaqHU1RrRqtmzfKNxFo4j-AgfSYgWRZL7AlY6TlVOTtke8KLoQnQ"/>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-2">
+<h3 class="text-base text-[#F8FAFC] font-bold group-hover:text-[#818CF8] transition-colors truncate">Lectura y Resumen de Documentos</h3>
+<span class="px-1.5 py-0.5 rounded text-[11px] bg-[#818CF8]/15 text-[#C7D2FE] font-mono font-semibold shrink-0">v4.0</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase bg-[#818CF8]/15 text-[#C7D2FE] font-bold tracking-wide">PRODUCTIVIDAD &amp; ANÁLISIS</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<label class="relative inline-flex items-center cursor-pointer" title="Activar/Desactivar Skill">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="toggleSkillMenu('menu-skill-2', event)" title="Más opciones" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-4 flex-1 justify-between">
+<div class="space-y-3">
+<p class="text-sm text-[#94A3B8] line-clamp-2 leading-relaxed">
+          Extracción semántica profunda, lectura inteligente y resumen ejecutivo de PDFs, contratos y hojas de cálculo.
+        </p>
+<div class="p-2.5 rounded-lg bg-[#0B0F19] border border-[#293548] font-mono text-xs text-[#C7D2FE] flex items-center justify-between">
+<span class="truncate font-medium">POST /api/v1/skills/documents</span>
+<button class="text-[#94A3B8] hover:text-[#818CF8] transition-colors shrink-0 ml-2" onclick="navigator.clipboard.writeText('POST /api/v1/skills/documents')" title="Copiar Endpoint" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3 bg-[#1E293B] border border-[#293548] rounded-lg p-3">
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Llamadas/Mes</span>
+<span class="text-sm font-semibold text-[#F8FAFC]">290k llamadas</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Tasa de Éxito</span>
+<span class="text-sm font-semibold text-[#34D399]">98.2%</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-[#94A3B8] text-xs">
+<span class="material-symbols-outlined text-[18px] text-[#818CF8]">smart_toy</span>
+<span><strong class="text-[#F8FAFC]">28</strong> agentes vinculados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#34D399]/15 text-[#34D399] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#34D399]"></span>
+            Activo
+          </span>
+<button class="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#293548] text-[#F8FAFC] hover:bg-[#293548] hover:border-[#818CF8]/40 text-xs font-medium transition-all" onclick="openAgentModal('Lectura y Resumen de Documentos')" type="button">
+            Configurar
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill 3: Redactor y Clasificador de Correos -->
+<div class="skill-card group bg-[#131A2B] rounded-xl shadow-sm hover:shadow-lg flex flex-col justify-between transition-all duration-200 border border-[#293548] hover:border-[#818CF8]/40 overflow-hidden" data-cat="comunicaciones">
+<!-- Card Header Resaltado -->
+<div class="px-5 py-3.5 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-[#131A2B] p-1.5 shadow-sm border border-[#293548] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<img alt="Redactor y Clasificador de Correos" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOtWZ1L-NQtTixwwqqkqMvNl86TfoaIkYyZiCsATd7gA2VUMElSzY5Tcc7zCOQxaY3sBPuv09SJBpSV1mW-p9e2eAB3h9A9oxlpydhmUJnRNPlg-D1cMflSZ4fBot2CawlJoy5wFgscAu47ZJF3gHn4BsaGxtv3S7FqMwxQh0wo1XY0Xl_jeZCuXwWk1i9bx9cNGZBceUnnY3E31fxGpsX0-9vhyAibuPGQk11TVdIdvM_xqZ2S5Mevw"/>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-2">
+<h3 class="text-base text-[#F8FAFC] font-bold group-hover:text-[#818CF8] transition-colors truncate">Redactor y Clasificador de Correos</h3>
+<span class="px-1.5 py-0.5 rounded text-[11px] bg-[#818CF8]/15 text-[#C7D2FE] font-mono font-semibold shrink-0">v2.8</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase bg-[#818CF8]/15 text-[#C7D2FE] font-bold tracking-wide">COMUNICACIONES</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<label class="relative inline-flex items-center cursor-pointer" title="Activar/Desactivar Skill">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="toggleSkillMenu('menu-skill-3', event)" title="Más opciones" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-4 flex-1 justify-between">
+<div class="space-y-3">
+<p class="text-sm text-[#94A3B8] line-clamp-2 leading-relaxed">
+          Generación contextual de respuestas por email, clasificación y triage de bandejas de entrada y envíos masivos personalizados.
+        </p>
+<div class="p-2.5 rounded-lg bg-[#0B0F19] border border-[#293548] font-mono text-xs text-[#C7D2FE] flex items-center justify-between">
+<span class="truncate font-medium">POST /api/v1/skills/email</span>
+<button class="text-[#94A3B8] hover:text-[#818CF8] transition-colors shrink-0 ml-2" onclick="navigator.clipboard.writeText('POST /api/v1/skills/email')" title="Copiar Endpoint" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3 bg-[#1E293B] border border-[#293548] rounded-lg p-3">
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Llamadas/Mes</span>
+<span class="text-sm font-semibold text-[#F8FAFC]">620k llamadas</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Tasa de Éxito</span>
+<span class="text-sm font-semibold text-[#34D399]">99.4%</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-[#94A3B8] text-xs">
+<span class="material-symbols-outlined text-[18px] text-[#818CF8]">smart_toy</span>
+<span><strong class="text-[#F8FAFC]">45</strong> agentes vinculados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#34D399]/15 text-[#34D399] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#34D399]"></span>
+            Activo
+          </span>
+<button class="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#293548] text-[#F8FAFC] hover:bg-[#293548] hover:border-[#818CF8]/40 text-xs font-medium transition-all" onclick="openAgentModal('Redactor y Clasificador de Correos')" type="button">
+            Configurar
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Skill 4: Transcriptor de Reuniones -->
+<div class="skill-card group bg-[#131A2B] rounded-xl shadow-sm hover:shadow-lg flex flex-col justify-between transition-all duration-200 border border-[#293548] hover:border-[#818CF8]/40 overflow-hidden" data-cat="soporte">
+<!-- Card Header Resaltado -->
+<div class="px-5 py-3.5 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-11 h-11 rounded-lg bg-[#131A2B] p-1.5 shadow-sm border border-[#293548] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+<img alt="Transcriptor de Reuniones" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy3d5jLUUvZkeYS3O-y9HWhmRQ-s5gp43MYOUTGldZZuZMgwVXjq4_DmJo7fafXK0bQukuncJqEd7otjRHg0bF-yc2cgBVK6gUjLBx0Y92deAfIKW-7lwCJPx6VJvNioWt_-aAfiYvmwcPrVOrdWPMlxJqBlCtLcEVHCMnHF4oeIT_myjD2QlpZ0U_buKfDgBeB1ZXZGHCGokHK_Ow5Ok3AMSIkJCxGA9erti_CorizSP2NESuL1_gsQ"/>
+</div>
+<div class="truncate">
+<div class="flex items-center gap-2">
+<h3 class="text-base text-[#F8FAFC] font-bold group-hover:text-[#818CF8] transition-colors truncate">Transcriptor de Reuniones</h3>
+<span class="px-1.5 py-0.5 rounded text-[11px] bg-[#818CF8]/15 text-[#C7D2FE] font-mono font-semibold shrink-0">v1.9</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase bg-[#818CF8]/15 text-[#C7D2FE] font-bold tracking-wide">SOPORTE &amp; VOZ</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<label class="relative inline-flex items-center cursor-pointer" title="Activar/Desactivar Skill">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="toggleSkillMenu('menu-skill-4', event)" title="Más opciones" type="button">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-5 flex flex-col gap-4 flex-1 justify-between">
+<div class="space-y-3">
+<p class="text-sm text-[#94A3B8] line-clamp-2 leading-relaxed">
+          Transcripción en tiempo real de llamadas y notas de voz multilingüe, generación de minutas y análisis de sentimientos.
+        </p>
+<div class="p-2.5 rounded-lg bg-[#0B0F19] border border-[#293548] font-mono text-xs text-[#C7D2FE] flex items-center justify-between">
+<span class="truncate font-medium">WSS /api/v1/skills/voice-transcribe</span>
+<button class="text-[#94A3B8] hover:text-[#818CF8] transition-colors shrink-0 ml-2" onclick="navigator.clipboard.writeText('WSS /api/v1/skills/voice-transcribe')" title="Copiar Endpoint" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3 bg-[#1E293B] border border-[#293548] rounded-lg p-3">
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Llamadas/Mes</span>
+<span class="text-sm font-semibold text-[#F8FAFC]">95k llamadas</span>
+</div>
+<div>
+<span class="block text-[10px] font-bold text-[#94A3B8] uppercase">Tasa de Éxito</span>
+<span class="text-sm font-semibold text-[#34D399]">94.8%</span>
+</div>
+</div>
+</div>
+<div class="pt-3 border-t border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-[#94A3B8] text-xs">
+<span class="material-symbols-outlined text-[18px] text-[#818CF8]">smart_toy</span>
+<span><strong class="text-[#F8FAFC]">12</strong> agentes vinculados</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-[#34D399]/15 text-[#34D399] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#34D399]"></span>
+            Activo
+          </span>
+<button class="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#293548] text-[#F8FAFC] hover:bg-[#293548] hover:border-[#818CF8]/40 text-xs font-medium transition-all" onclick="alert('Abriendo telemetría y diagnóstico en vivo...')" type="button">
+            Diagnosticar
+          </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Paginación Inferior -->
+<footer class="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 border-t border-[#293548]">
+<div class="text-[#94A3B8] text-xs">Mostrando <span class="font-semibold text-[#F8FAFC]">1</span> a <span class="font-semibold text-[#F8FAFC]">4</span> de <span class="font-semibold text-[#F8FAFC]">4</span> skills registradas</div>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-[#131A2B] border border-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B] text-xs font-medium shadow-sm transition-all disabled:opacity-40 disabled:pointer-events-none" disabled="" type="button">
+        Anterior
+      </button>
+<button class="w-8 h-8 rounded-lg bg-[#6366F1] text-white text-xs font-bold shadow-sm" type="button">
+        1
+      </button>
+<button class="w-8 h-8 rounded-lg bg-[#131A2B] border border-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B] text-xs font-medium transition-all" type="button">
+        2
+      </button>
+<button class="w-8 h-8 rounded-lg bg-[#131A2B] border border-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B] text-xs font-medium transition-all" type="button">
+        3
+      </button>
+<span class="px-1 text-[#94A3B8] text-xs">...</span>
+<button class="w-8 h-8 rounded-lg bg-[#131A2B] border border-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B] text-xs font-medium transition-all" type="button">
+        7
+      </button>
+<button class="px-3 py-1.5 rounded-lg bg-[#131A2B] border border-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] hover:bg-[#1E293B] text-xs font-medium shadow-sm transition-all" type="button">
+        Siguiente
+      </button>
+</div>
+</footer>
+<!-- Modal Interactivo: Nueva Skill -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0F19]/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="newSkillModal">
+<div class="relative w-full max-w-xl bg-[#131A2B] border border-[#293548] rounded-2xl shadow-2xl overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+<div class="px-6 py-4 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#818CF8]/15 text-[#818CF8] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-[#F8FAFC]">Registrar Nueva Skill</h3>
+<span class="text-xs text-[#94A3B8]">Definición manual o importación de esquema OpenAPI 3.1</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="closeNewSkillModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-6 space-y-4">
+<div>
+<label class="block text-[11px] font-bold text-[#94A3B8] uppercase mb-1.5">Nombre de la Capacidad</label>
+<input class="w-full px-3.5 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] text-sm focus:outline-none focus:ring-2 focus:ring-[#818CF8]" placeholder="ej. Generador de Documentos Notion" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-[11px] font-bold text-[#94A3B8] uppercase mb-1.5">Categoría</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] text-xs focus:outline-none focus:ring-2 focus:ring-[#818CF8]">
+<option>Productividad</option>
+<option>Comunicaciones</option>
+<option>Finanzas &amp; Datos</option>
+<option>Soporte &amp; Voz</option>
+</select>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-[#94A3B8] uppercase mb-1.5">Método &amp; Protocolo</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] text-xs focus:outline-none focus:ring-2 focus:ring-[#818CF8]">
+<option>POST (REST API)</option>
+<option>GET (Lectura)</option>
+<option>WSS (WebSocket)</option>
+<option>gRPC Invocación</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-[#94A3B8] uppercase mb-1.5">URL del Endpoint Base</label>
+<input class="w-full px-3.5 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] font-mono text-xs focus:outline-none focus:ring-2 focus:ring-[#818CF8]" placeholder="https://api.tuempresa.com/v1/skills/notion-sync" type="text"/>
+</div>
+<div>
+<label class="block text-[11px] font-bold text-[#94A3B8] uppercase mb-1.5">JSON Schema de Parámetros de Entrada</label>
+<textarea class="w-full p-3 rounded-lg bg-[#0B0F19] border border-[#293548] text-[#F8FAFC] font-mono text-xs focus:outline-none focus:ring-2 focus:ring-[#818CF8] resize-none leading-relaxed" placeholder='{ "type": "object", "properties": { "document_id": { "type": "string" } } }' rows="3"></textarea>
+</div>
+</div>
+<div class="px-6 py-4 bg-[#1E293B] border-t border-[#293548] flex items-center justify-end gap-3">
+<button class="px-4 py-2 rounded-lg border border-[#293548] text-[#F8FAFC] hover:bg-[#293548] text-xs font-medium" onclick="closeNewSkillModal()" type="button">
+          Cancelar
+        </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-xs font-semibold shadow-sm transition-all" onclick="closeNewSkillModal()" type="button">
+          Publicar Skill
+        </button>
+</div>
+</div>
+</div>
+<!-- Script interactivo de filtrado y modales -->
+<script>
+    // Filtro interactivo de búsqueda
+    const filterInput = document.getElementById('skillSearchInput');
+    if (filterInput) {
+      filterInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.skill-card');
+        cards.forEach(card => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(query) ? 'flex' : 'none';
+        });
+      });
+    }
+
+    // Filtro interactivo de pestañas (Pills)
+    const categoryPills = document.querySelectorAll('.category-pill');
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', function() {
+        categoryPills.forEach(p => {
+          p.classList.remove('bg-[#6366F1]', 'text-white', 'shadow-sm');
+          p.classList.add('bg-[#1E293B]', 'border', 'border-[#293548]', 'text-[#94A3B8]');
+        });
+        this.classList.remove('bg-[#1E293B]', 'border', 'border-[#293548]', 'text-[#94A3B8]');
+        this.classList.add('bg-[#6366F1]', 'text-white', 'shadow-sm');
+
+        const cat = this.getAttribute('data-category');
+        const cards = document.querySelectorAll('.skill-card');
+        cards.forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Modales
+    function openCreateSkillModal() {
+      const modal = document.getElementById('newSkillModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      }
+    }
+
+    function closeNewSkillModal() {
+      const modal = document.getElementById('newSkillModal');
+      if (modal) {
+        modal.classList.add('opacity-0');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+      }
+    }
+
+    function triggerExportSkills() {
+      alert('Exportando catálogo de skills en formato JSON / YAML...');
+    }
+
+    function toggleSkillMenu(id, event) {
+      event.stopPropagation();
+      alert('Opciones adicionales para la skill seleccionada (Duplicar, Probar Sandbox, Deprecar).');
+    }
+  </script>
+</div>
+</main>
+</div>
+<!-- Modal de Configuración / Creación de Agente -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0F19]/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="agentConfigModal">
+<div class="relative w-full max-w-2xl bg-[#131A2B] border border-[#293548] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-[#1E293B] border-b border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-[#818CF8]/15 text-[#818CF8] flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-[#F8FAFC]" id="modalAgentTitle">Configuración de Skill</h3>
+<span class="text-xs text-[#94A3B8]">Parámetros de inferencia, endpoints y límites asociados</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#293548] text-[#94A3B8] hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="closeAgentModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 overflow-y-auto space-y-5 text-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-1.5">Entorno de Ejecución</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#0B0F19] border border-[#293548] text-sm text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#818CF8]">
+<option selected="" value="prod">Producción (Alta Disponibilidad)</option>
+<option value="sandbox">Sandbox Seguro</option>
+<option value="staging">Staging v2</option>
+</select>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-[#94A3B8]">Timeout de Invocación (seg)</label>
+<span class="font-mono text-xs font-semibold text-[#818CF8]" id="tempValueDisplay">15s</span>
+</div>
+<input class="w-full accent-[#6366F1] h-2 bg-[#293548] rounded-lg cursor-pointer" max="60" min="5" oninput="document.getElementById('tempValueDisplay').innerText = this.value + 's'" step="5" type="range" value="15"/>
+<div class="flex justify-between text-[10px] text-[#94A3B8] mt-1">
+<span>Rápido (5s)</span>
+<span>Estándar (15s)</span>
+<span>Largo (60s)</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-1.5">Cabeceras y Autenticación de Skill</label>
+<textarea class="w-full p-3 rounded-lg bg-[#0B0F19] border border-[#293548] font-mono text-xs text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#818CF8] resize-none leading-relaxed" rows="4">Authorization: Bearer {{VAULT_SECRET_KEY}}
+Content-Type: application/json
+X-AgentHub-Runtime: edge-v2</textarea>
+</div>
+<!-- Toggles de Ejecución -->
+<div class="p-4 rounded-xl bg-[#1E293B] border border-[#293548] space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-xs text-[#F8FAFC]">Reintentos automáticos (Exponential Backoff)</div>
+<div class="text-[11px] text-[#94A3B8]">Reintenta hasta 3 veces en caso de error 5xx o timeout del proveedor.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+</div>
+<div class="border-t border-[#293548]"></div>
+<div class="flex items-center justify-between">
+<div>
+<div class="font-semibold text-xs text-[#F8FAFC]">Ejecución en Sandbox Aislado</div>
+<div class="text-[11px] text-[#94A3B8]">Limita las invocaciones a contenedores efímeros gVisor seguros.</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-10 h-5 bg-[#334155] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#6366F1]"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 bg-[#1E293B] border-t border-[#293548] flex items-center justify-end gap-3">
+<button class="px-4 py-2 rounded-lg border border-[#293548] bg-[#131A2B] hover:bg-[#293548] text-[#F8FAFC] text-sm font-medium transition-colors" onclick="closeAgentModal()">
+          Cancelar
+        </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="closeAgentModal()">
+          Guardar Cambios
+        </button>
+</div>
+</div>
+</div>
+<script>
+    function openAgentModal(skillName) {
+      const modal = document.getElementById('agentConfigModal');
+      const title = document.getElementById('modalAgentTitle');
+      if (title && skillName) {
+        title.innerText = 'Configuración - ' + skillName;
+      }
+      if (modal) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+        }, 10);
+      }
+    }
+
+    function closeAgentModal() {
+      const modal = document.getElementById('agentConfigModal');
+      if (modal) {
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 200);
+      }
+    }
+
+    const modalElem = document.getElementById('agentConfigModal');
+    if (modalElem) {
+      modalElem.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeAgentModal();
+        }
+      });
+    }
+  </script>
+</body></html>

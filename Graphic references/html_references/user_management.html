@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+<html class="" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>AgentHub - Gestión de Usuarios</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            // Oficial AgentHub Theme Palette
+            brand: {
+              DEFAULT: "#6366F1",
+              hover: "#4F46E5",
+              accent: "#818CF8",
+              light: "#C7D2FE"
+            },
+            status: {
+              success: "#10B981",
+              warning: "#F59E0B",
+              danger: "#EF4444",
+              info: "#0284C7"
+            },
+            canvas: {
+              light: "#F8FAFC",
+              dark: "#0B0F19"
+            },
+            card: {
+              light: "#FFFFFF",
+              dark: "#131A2B"
+            },
+            elevated: {
+              light: "#F1F5F9",
+              dark: "#1E293B"
+            },
+            border: {
+              light: "#E2E8F0",
+              dark: "#293548"
+            },
+            txt: {
+              primaryLight: "#0F172A",
+              secondaryLight: "#64748B",
+              primaryDark: "#F8FAFC",
+              secondaryDark: "#94A3B8"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.4);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.filled {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="bg-canvas-light dark:bg-canvas-dark text-txt-primaryLight dark:text-txt-primaryDark font-sans antialiased min-h-screen selection:bg-brand selection:text-white flex">
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-card-light dark:bg-card-dark border-r border-border-light dark:border-border-dark z-50 flex flex-col justify-between transition-colors duration-200">
+<div class="flex flex-col flex-1">
+<!-- Logo Container -->
+<div class="h-16 px-6 flex items-center border-b border-border-light dark:border-border-dark">
+<a class="flex items-center gap-2" href="#">
+<img alt="AgentHub Logo" class="h-8 w-auto object-contain dark:hidden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlZBQzK_fSqy6YEJvEuKNV834_mQzI3M2Jwt5Pap4s6xZGNKE_zetfWjmJOON-4Sev4xuI8zXIf3-GJipnaG0YgjFlnjfjKViT1A5es3gB6jWLSkrv2gz-dO-ZGaZ-jxcuqxY8Fw5NEXgrJpzl0YbzF0VrifyLJzGbo20c7g3mxSD5-aHHWcdJIX-6_OxYXwPA1XqQz4u3-kcmHrNSPfS2iohXY4dwElq7SbdhvXVjRdyjd0plvsvk0A"/>
+<img alt="AgentHub Logo Dark" class="h-8 w-auto object-contain hidden dark:inline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsTZZ1snwKN7NVCzpMGe1EK3J5Dn-Vrm99Oohu-6-slgN7bUvlaaHYZc2P6NRvg7wuoGRo1iiYhZA9uio3aQ8QZGyx0KOpwWk6Vpv57PmNvFOTBooskHseicJOt0wVj-YG-cevk50248TWGJbmzUycDX2FUP3WbJPOinbSd6_QGomRHI_VyUPtsVtuDNAiJxhh8vxWsGlRNc7ZENWlRV-pEk1hbLg5PAdtzWPNz7yCkkBrIemOCTvHXw"/>
+</a>
+</div>
+<!-- Navigation Section -->
+<div class="px-4 py-5">
+<div class="text-[11px] font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark uppercase tracking-wider px-3 mb-2 font-mono">
+          Plataforma
+        </div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-txt-secondaryLight dark:text-txt-secondaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Dashboard</span>
+</a>
+<!-- Activo -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-[#6366F1] text-white font-medium text-sm rounded-lg shadow-sm shadow-indigo-500/20" href="#">
+<span class="material-symbols-outlined text-[20px] filled">group</span>
+<span>Gestión de usuarios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-txt-secondaryLight dark:text-txt-secondaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Gestión de agentes</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-txt-secondaryLight dark:text-txt-secondaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span>Skills</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-txt-secondaryLight dark:text-txt-secondaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Contrataciones</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-txt-secondaryLight dark:text-txt-secondaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+<span>Log de errores</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Cluster NEXAI Footer Widget -->
+<div class="p-4 m-3 bg-elevated-light dark:bg-elevated-dark rounded-xl border border-border-light dark:border-border-dark">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[11px] font-mono uppercase font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark">Cluster NEXAI</span>
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-status-success"></span>
+</span>
+</div>
+<div class="font-mono text-xs text-txt-primaryLight dark:text-txt-primaryDark font-medium truncate">v2.4.0-prod-node</div>
+<div class="mt-2 pt-2 border-t border-border-light/60 dark:border-border-dark/60 flex items-center justify-between text-xs text-txt-secondaryLight dark:text-txt-secondaryDark">
+<span>Sync Status</span>
+<span class="font-semibold text-status-success">99.98%</span>
+</div>
+</div>
+</aside>
+<!-- ==================== MAIN WRAPPER ==================== -->
+<div class="pl-64 flex-1 flex flex-col min-w-0">
+<!-- Header superior con acento inferior #6366F1 -->
+<header class="fixed top-0 left-64 right-0 h-16 bg-card-light/90 dark:bg-card-dark/90 backdrop-blur-md border-b-2 border-[#6366F1] shadow-[0_4px_12px_rgba(99,102,241,0.08)] z-40 px-6 flex items-center justify-between gap-4">
+<!-- Barra de búsqueda global -->
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-txt-secondaryLight dark:text-txt-secondaryDark text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-xs text-txt-primaryLight dark:text-txt-primaryDark placeholder:text-txt-secondaryLight dark:placeholder:text-txt-secondaryDark focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition-all" placeholder="Buscar usuarios, empresas, contratos o permisos... (Cmd + K)" type="text"/>
+</div>
+</div>
+<!-- Acciones de cabecera -->
+<div class="flex items-center gap-3">
+<!-- Toggle Light / Dark Mode interactivo -->
+<button class="w-9 h-9 rounded-lg bg-elevated-light dark:bg-elevated-dark hover:bg-border-light dark:hover:bg-border-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark flex items-center justify-center transition-colors border border-border-light dark:border-border-dark" onclick="document.documentElement.classList.toggle('dark')" title="Alternar Modo Claro / Oscuro">
+<span class="material-symbols-outlined text-[19px] dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined text-[19px] hidden dark:inline text-amber-400">light_mode</span>
+</button>
+<!-- Botón de notificaciones -->
+<button class="relative w-9 h-9 rounded-lg bg-elevated-light dark:bg-elevated-dark hover:bg-border-light dark:hover:bg-border-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark flex items-center justify-center transition-colors border border-border-light dark:border-border-dark" title="Notificaciones">
+<span class="material-symbols-outlined text-[19px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-status-danger"></span>
+</button>
+<!-- Separador vertical -->
+<div class="h-6 w-px bg-border-light dark:bg-border-dark mx-1"></div>
+<!-- Perfil Usuario Super Admin -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-8 h-8 rounded-lg bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shadow-sm shadow-indigo-500/20">
+            AD
+          </div>
+<div class="hidden md:flex flex-col text-left">
+<span class="text-xs font-semibold text-txt-primaryLight dark:text-txt-primaryDark leading-tight">Admin NEXAI</span>
+<span class="text-[10px] font-mono text-txt-secondaryLight dark:text-txt-secondaryDark font-medium">SUPER ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN CONTENT ==================== -->
+<main class="w-full pt-20 px-8 pb-12 flex-1">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- CABECERA DE PÁGINA -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-border-light dark:border-border-dark">
+<div>
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-txt-secondaryLight dark:text-txt-secondaryDark">
+<span>Administración</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-brand font-semibold">Gestión de Usuarios</span>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-txt-primaryLight dark:text-txt-primaryDark mt-1">Gestión de Usuarios</h1>
+<p class="text-xs text-txt-secondaryLight dark:text-txt-secondaryDark mt-0.5">Administración de accesos corporativos, roles de seguridad y asignación de créditos en AgentHub</p>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-2.5">
+<button class="px-3.5 py-2 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-primaryLight dark:text-txt-primaryDark text-xs font-medium flex items-center gap-2 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[17px] text-txt-secondaryLight dark:text-txt-secondaryDark">download</span>
+<span>Exportar</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-xs font-medium flex items-center gap-1.5 shadow-sm shadow-indigo-500/20 active:scale-98 transition-all" onclick="openModal('user-modal')">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Nuevo Usuario</span>
+</button>
+</div>
+</div>
+<!-- 4 TARJETAS KPI SUPERIORES CON BORDE IZQUIERDO DE COLOR -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-xl border border-border-light dark:border-border-dark border-l-4 border-l-[#6366F1] shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-mono uppercase font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark">Total Usuarios</span>
+<span class="text-2xl font-bold text-txt-primaryLight dark:text-txt-primaryDark mt-1">1.840</span>
+<span class="text-[11px] font-medium text-status-success flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +8.4% este mes
+              </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-brand flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-xl border border-border-light dark:border-border-dark border-l-4 border-l-[#10B981] shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-mono uppercase font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark">Usuarios Activos (24h)</span>
+<span class="text-2xl font-bold text-txt-primaryLight dark:text-txt-primaryDark mt-1">1.420</span>
+<span class="text-[11px] font-medium text-status-success flex items-center gap-1.5 mt-1">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-status-success"></span>
+</span>
+                77.2% concurrencia
+              </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-status-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">how_to_reg</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-xl border border-border-light dark:border-border-dark border-l-4 border-l-[#818CF8] shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-mono uppercase font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark">Empresas &amp; Clientes B2B</span>
+<span class="text-2xl font-bold text-txt-primaryLight dark:text-txt-primaryDark mt-1">64</span>
+<span class="text-[11px] font-medium text-brand-accent mt-1 bg-indigo-500/10 dark:bg-indigo-500/20 px-2 py-0.5 rounded w-max">
+                12 Enterprise
+              </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-[#818CF8] flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">apartment</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-xl border border-border-light dark:border-border-dark border-l-4 border-l-[#EF4444] shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-mono uppercase font-semibold text-txt-secondaryLight dark:text-txt-secondaryDark">Accesos Bloqueados</span>
+<span class="text-2xl font-bold text-txt-primaryLight dark:text-txt-primaryDark mt-1">3</span>
+<span class="text-[11px] font-medium text-status-danger mt-1 bg-red-500/10 dark:bg-red-500/20 px-2 py-0.5 rounded w-max flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span> Atención requerida
+              </span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-950/40 text-status-danger flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">person_off</span>
+</div>
+</div>
+</div>
+<!-- FILTROS, BÚSQUEDA Y CONTROL TOOLBAR -->
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+<!-- Input de búsqueda -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-txt-secondaryLight dark:text-txt-secondaryDark text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-xs text-txt-primaryLight dark:text-txt-primaryDark placeholder:text-txt-secondaryLight dark:placeholder:text-txt-secondaryDark focus:outline-none focus:ring-1 focus:ring-brand" id="userSearchInput" onkeyup="filterUsers()" placeholder="Filtrar por nombre, empresa o correo corporativo..." type="text"/>
+</div>
+<!-- Filtros de Estado en Pills y Dropdowns -->
+<div class="flex flex-wrap items-center gap-2">
+<!-- Pills de estado -->
+<div class="flex items-center bg-elevated-light dark:bg-elevated-dark p-1 rounded-lg border border-border-light dark:border-border-dark text-xs">
+<button class="status-pill px-3 py-1 rounded font-medium bg-[#6366F1] text-white transition-all" onclick="setStatusFilter('ALL', this)">Todos</button>
+<button class="status-pill px-3 py-1 rounded text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" onclick="setStatusFilter('Activo', this)">Activos</button>
+<button class="status-pill px-3 py-1 rounded text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" onclick="setStatusFilter('En espera', this)">Pendientes</button>
+<button class="status-pill px-3 py-1 rounded text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all" onclick="setStatusFilter('Bloqueado', this)">Bloqueados</button>
+</div>
+<!-- Dropdown Rol -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-xs text-txt-secondaryLight dark:text-txt-secondaryDark">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<select class="bg-transparent text-txt-primaryLight dark:text-txt-primaryDark font-medium focus:outline-none cursor-pointer pr-1" id="roleFilter" onchange="filterUsers()">
+<option class="bg-card-light dark:bg-card-dark" value="ALL">Todos los Roles</option>
+<option class="bg-card-light dark:bg-card-dark" value="Super Admin">Super Admin</option>
+<option class="bg-card-light dark:bg-card-dark" value="Administrador">Administrador</option>
+<option class="bg-card-light dark:bg-card-dark" value="Desarrollador">Desarrollador</option>
+<option class="bg-card-light dark:bg-card-dark" value="Visor">Visor</option>
+</select>
+</div>
+<!-- Dropdown Plan -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-xs text-txt-secondaryLight dark:text-txt-secondaryDark">
+<span class="material-symbols-outlined text-[16px]">workspace_premium</span>
+<select class="bg-transparent text-txt-primaryLight dark:text-txt-primaryDark font-medium focus:outline-none cursor-pointer pr-1" id="planFilter" onchange="filterUsers()">
+<option class="bg-card-light dark:bg-card-dark" value="ALL">Todos los Planes</option>
+<option class="bg-card-light dark:bg-card-dark" value="Enterprise">Enterprise</option>
+<option class="bg-card-light dark:bg-card-dark" value="Pro">Pro Plan</option>
+<option class="bg-card-light dark:bg-card-dark" value="Startup">Startup</option>
+</select>
+</div>
+<!-- Botón reset -->
+<button class="w-8 h-8 rounded-lg bg-elevated-light dark:bg-elevated-dark hover:bg-border-light dark:hover:bg-border-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark flex items-center justify-center border border-border-light dark:border-border-dark transition-colors" onclick="resetFilters()" title="Restablecer filtros">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- TABLA SAAS MODERNA Y ESPACIOSA -->
+<div class="bg-card-light dark:bg-card-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="usersTable">
+<thead>
+<tr class="bg-elevated-light/60 dark:bg-elevated-dark/60 text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono uppercase tracking-wider border-b border-border-light dark:border-border-dark">
+<th class="py-3.5 px-4">Usuario</th>
+<th class="py-3.5 px-4">Empresa / Depto</th>
+<th class="py-3.5 px-4">Rol en Plataforma</th>
+<th class="py-3.5 px-4">Agentes &amp; Skills</th>
+<th class="py-3.5 px-4">Créditos / Consumo</th>
+<th class="py-3.5 px-4">Estado</th>
+<th class="py-3.5 px-4 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark text-xs" id="usersTableBody">
+<!-- Fila 1: Carlos Mendoza -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="NexaCorp" data-email="carlos.mendoza@nexacorp.io" data-name="Carlos Mendoza" data-plan="Enterprise" data-role="Super Admin" data-status="Activo">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-brand/40">
+<img alt="Carlos Mendoza" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR7Q66XFvweeTBo2MttSC_gkCRvC8e3nLII-LNFW0cl-JCbnZ-F9ldY3QT5NjotUu9JvxdyHvbZaPuGt97xvBbFw_zeqOHxI5NTfciUcyUeepQ7NhTla4fVcb2h0z47ZwoTpFB_3SBU3Lij1VvTsKdIpWPBmdoDUR8jeDlZYX82UY4yKeMzNL9KELlmVaXJc06bt5Ls6KqYnxpzpib1_pKx54QskkBfHWcnzOsAP9g"/>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">Carlos Mendoza</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">carlos.mendoza@nexacorp.io</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">NexaCorp Systems</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Infraestructura &amp; AI Core</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+<span class="material-symbols-outlined text-[13px]">shield_person</span> Super Admin
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-indigo-500/10 text-brand font-medium text-[11px]">8 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">14 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-primaryLight dark:text-txt-primaryDark">14.2M tokens</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">71%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-[#6366F1] h-full rounded-full" style="width: 71%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-status-success">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> Activo
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('Carlos Mendoza', 'carlos.mendoza@nexacorp.io', 'NexaCorp Systems', 'Super Admin', 'Enterprise', 'Activo')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-status-danger transition-colors" title="Suspender usuario">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Elena Ruiz -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="FinTech Sol" data-email="elena.ruiz@fintechsol.es" data-name="Elena Ruiz" data-plan="Enterprise" data-role="Administrador" data-status="Activo">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-brand/40">
+<img alt="Elena Ruiz" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRJj-yJHFL2iZGRAT0LCKr77ihBkdFUQmVPWRiDFjm9b3DU1OhRoIQss-jAdQryEf9I1EuyoVHbiIlr39WBEt-D_hA15ngtGMMgFR_8s6tW_9mBBSFkvsrt5_heMg3tX6oFfmOyj_rPck0fwzm_k04CVf8uhmzeebPGuKL2kyhS75L2Rxy8vAoc5Hp6wN-S1Vubw1_LKFuTNu7Ci6g7BQRAX2hmZxtgIb5-bM5P_fo"/>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">Elena Ruiz</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">elena.ruiz@fintechsol.es</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">FinTech Solutions S.L.</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Operaciones Financieras</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-indigo-500/10 text-[#6366F1] dark:text-[#818CF8] border border-indigo-500/20">
+<span class="material-symbols-outlined text-[13px]">admin_panel_settings</span> Administrador
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-indigo-500/10 text-brand font-medium text-[11px]">5 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">9 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-primaryLight dark:text-txt-primaryDark">6.8M tokens</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">48%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full rounded-full" style="width: 48%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-status-success">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> Activo
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('Elena Ruiz', 'elena.ruiz@fintechsol.es', 'FinTech Solutions S.L.', 'Administrador', 'Enterprise', 'Activo')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-status-danger transition-colors" title="Suspender usuario">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 3: Marcus Vance -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="Acme Legal Tech" data-email="m.vance@acmelegal.com" data-name="Marcus Vance" data-plan="Pro" data-role="Desarrollador" data-status="En espera">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-blue-500/20 text-blue-500 flex items-center justify-center font-bold text-xs border border-blue-500/30">
+                        MV
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">Marcus Vance</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">m.vance@acmelegal.com</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">Acme Legal Tech</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Integraciones API</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-500 dark:text-blue-400 border border-blue-500/20">
+<span class="material-symbols-outlined text-[13px]">code</span> Desarrollador
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-indigo-500/10 text-brand font-medium text-[11px]">2 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">4 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-primaryLight dark:text-txt-primaryDark">840K tokens</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">18%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full rounded-full" style="width: 18%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/10 text-status-warning">
+<span class="w-1.5 h-1.5 rounded-full bg-status-warning"></span> En espera
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('Marcus Vance', 'm.vance@acmelegal.com', 'Acme Legal Tech', 'Desarrollador', 'Pro', 'En espera')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-status-danger transition-colors" title="Suspender usuario">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 4: Sophie Laurent -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="SaaS Growth Lab" data-email="s.laurent@growthlab.io" data-name="Sophie Laurent" data-plan="Enterprise" data-role="Administrador" data-status="Activo">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-brand/40">
+<img alt="Sophie Laurent" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlSVmOD9TKfFg_u8-eBoCL-2D9bxHObOmWTjC4hFUGA6ihkZ8NI1o7h03IEzje5lJeVS5N4JruOrohmJybE1xnpB4wQKg_ufbEY_NgSnTkIBZ7UFiAun08VGCPUGdhqM5hkc1V8PUe51Ej16H96rgJRYha-M-fZeA8bkTaOqShAMeFvs61bjlYpy3s-cafO8qyjV6L8TZ3t3_w-PdwlJ5vQIrDD-wqwaF7wNnLUTc_"/>
+</div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">Sophie Laurent</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">s.laurent@growthlab.io</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">SaaS Growth Lab</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Marketing Automatizado</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-indigo-500/10 text-[#6366F1] dark:text-[#818CF8] border border-indigo-500/20">
+<span class="material-symbols-outlined text-[13px]">admin_panel_settings</span> Administrador
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-indigo-500/10 text-brand font-medium text-[11px]">11 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">22 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-primaryLight dark:text-txt-primaryDark">29.4M tokens</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">92%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-status-warning h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-status-success">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> Activo
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('Sophie Laurent', 's.laurent@growthlab.io', 'SaaS Growth Lab', 'Administrador', 'Enterprise', 'Activo')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-status-danger transition-colors" title="Suspender usuario">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 5: David Kim -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="DevOps Agency" data-email="d.kim@devopsagency.net" data-name="David Kim" data-plan="Startup" data-role="Visor" data-status="Bloqueado">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-500/20 text-slate-400 flex items-center justify-center font-bold text-xs border border-slate-500/30">
+                        DK
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">David Kim</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">d.kim@devopsagency.net</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">DevOps Agency</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Auditoría Externa</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-500/10 text-slate-400 border border-slate-500/20">
+<span class="material-symbols-outlined text-[13px]">visibility</span> Visor
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-slate-500/10 text-txt-secondaryLight dark:text-txt-secondaryDark font-medium text-[11px]">0 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">0 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-secondaryLight dark:text-txt-secondaryDark">Inactivo</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">0%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-status-danger h-full rounded-full" style="width: 0%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-red-500/10 text-status-danger">
+<span class="w-1.5 h-1.5 rounded-full bg-status-danger"></span> Bloqueado
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('David Kim', 'd.kim@devopsagency.net', 'DevOps Agency', 'Visor', 'Startup', 'Bloqueado')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-status-success hover:bg-emerald-500/10 transition-colors" title="Reactivar usuario">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 6: Lucía Morales -->
+<tr class="user-row hover:bg-elevated-light/40 dark:hover:bg-elevated-dark/40 transition-colors" data-company="Global Logistics" data-email="l.morales@globallogistics.com" data-name="Lucía Morales" data-plan="Pro" data-role="Desarrollador" data-status="Activo">
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center font-bold text-xs border border-emerald-500/30">
+                        LM
+                      </div>
+<div class="flex flex-col">
+<span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark text-sm">Lucía Morales</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px] font-mono">l.morales@globallogistics.com</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">Global Logistics Fleet</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">Ruteo Autónomo</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-500/10 text-blue-500 dark:text-blue-400 border border-blue-500/20">
+<span class="material-symbols-outlined text-[13px]">code</span> Desarrollador
+                    </span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-indigo-500/10 text-brand font-medium text-[11px]">3 Agentes</span>
+<span class="px-2 py-0.5 rounded bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark text-[11px]">7 Skills</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="w-36 flex flex-col gap-1">
+<div class="flex justify-between text-[11px]">
+<span class="font-mono text-txt-primaryLight dark:text-txt-primaryDark">2.1M tokens</span>
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">35%</span>
+</div>
+<div class="w-full h-1.5 bg-elevated-light dark:bg-elevated-dark rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full rounded-full" style="width: 35%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-status-success">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success"></span> Activo
+                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-brand transition-colors" onclick="openEditUser('Lucía Morales', 'l.morales@globallogistics.com', 'Global Logistics Fleet', 'Desarrollador', 'Pro', 'Activo')" title="Editar configuración">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-status-danger transition-colors" title="Suspender usuario">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-elevated-light dark:hover:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-colors" title="Ver logs">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINACIÓN INFERIOR -->
+<div class="px-4 py-3 bg-elevated-light/40 dark:bg-elevated-dark/40 border-t border-border-light dark:border-border-dark flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+<span class="text-txt-secondaryLight dark:text-txt-secondaryDark">
+              Mostrando <span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark">1</span> a <span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark">6</span> de <span class="font-semibold text-txt-primaryLight dark:text-txt-primaryDark">1.840</span> usuarios registrados
+            </span>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark font-medium disabled:opacity-40" disabled="">
+                Anterior
+              </button>
+<button class="w-8 h-8 rounded-lg bg-[#6366F1] text-white font-semibold flex items-center justify-center shadow-sm">
+                1
+              </button>
+<button class="w-8 h-8 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark font-medium flex items-center justify-center">
+                2
+              </button>
+<button class="w-8 h-8 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark font-medium flex items-center justify-center">
+                3
+              </button>
+<span class="px-1 text-txt-secondaryLight dark:text-txt-secondaryDark">...</span>
+<button class="w-8 h-8 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark font-medium flex items-center justify-center">
+                308
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark hover:bg-elevated-light dark:hover:bg-elevated-dark font-medium">
+                Siguiente
+              </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- ==================== MODAL CREAR / EDITAR USUARIO ==================== -->
+<div class="fixed inset-0 z-50 hidden overflow-y-auto" id="user-modal">
+<!-- Backdrop Blur -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeModal('user-modal')"></div>
+<div class="min-h-screen px-4 flex items-center justify-center">
+<div class="relative bg-card-light dark:bg-card-dark rounded-2xl border border-border-light dark:border-border-dark w-full max-w-xl p-6 shadow-2xl z-10 my-8">
+<!-- Encabezado Modal -->
+<div class="flex items-center justify-between pb-4 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-indigo-500/10 text-brand flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" id="modal-icon">person_add</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-txt-primaryLight dark:text-txt-primaryDark" id="modal-title">Crear Nuevo Usuario</h3>
+<p class="text-xs text-txt-secondaryLight dark:text-txt-secondaryDark">Asigna credenciales, organización y permisos de agente</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg bg-elevated-light dark:bg-elevated-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark flex items-center justify-center transition-colors" onclick="closeModal('user-modal')">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Formulario -->
+<form class="mt-5 space-y-4 text-xs" onsubmit="event.preventDefault(); closeModal('user-modal');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Nombre Completo</label>
+<input class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand" id="form-name" placeholder="Ej. Mateo Valdés" type="text"/>
+</div>
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Correo Corporativo</label>
+<input class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand font-mono" id="form-email" placeholder="m.valdes@empresa.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Empresa / Organización</label>
+<input class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand" id="form-company" placeholder="Ej. NexaCorp S.A." type="text"/>
+</div>
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Departamento / Área</label>
+<input class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand" placeholder="Ej. Arquitectura AI" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Rol de Plataforma</label>
+<select class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand" id="form-role">
+<option value="Super Admin">Super Admin (Control Total)</option>
+<option value="Administrador">Administrador (Gestión Agentes/Skills)</option>
+<option selected="" value="Desarrollador">Desarrollador (API &amp; Sandbox)</option>
+<option value="Visor">Visor (Solo Lectura y Reportes)</option>
+</select>
+</div>
+<div>
+<label class="block font-medium text-txt-primaryLight dark:text-txt-primaryDark mb-1">Nivel de Plan B2B</label>
+<select class="w-full px-3 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-primaryLight dark:text-txt-primaryDark focus:outline-none focus:ring-1 focus:ring-brand" id="form-plan">
+<option value="Enterprise">Enterprise (Tokens Ilimitados / Nodo Dedicado)</option>
+<option selected="" value="Pro">Pro (Hasta 10M tokens / mes)</option>
+<option value="Startup">Startup (Sandbox básico)</option>
+</select>
+</div>
+</div>
+<!-- Permisos y Toggles -->
+<div class="pt-2">
+<span class="block font-semibold text-txt-primaryLight dark:text-txt-primaryDark mb-2 text-xs">Permisos &amp; Facultades del Agente</span>
+<div class="space-y-2 bg-elevated-light dark:bg-elevated-dark p-3 rounded-xl border border-border-light dark:border-border-dark">
+<label class="flex items-center justify-between cursor-pointer">
+<div>
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">Despliegue de Agentes Autónomos</span>
+<p class="text-[11px] text-txt-secondaryLight dark:text-txt-secondaryDark">Permite compilar y lanzar agentes con runtime en producción</p>
+</div>
+<input checked="" class="rounded border-border-light dark:border-border-dark text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+</label>
+<div class="h-px bg-border-light dark:bg-border-dark"></div>
+<label class="flex items-center justify-between cursor-pointer">
+<div>
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">Instalación de Skills de Terceros</span>
+<p class="text-[11px] text-txt-secondaryLight dark:text-txt-secondaryDark">Acceso al marketplace de extensiones de herramientas</p>
+</div>
+<input checked="" class="rounded border-border-light dark:border-border-dark text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+</label>
+<div class="h-px bg-border-light dark:bg-border-dark"></div>
+<label class="flex items-center justify-between cursor-pointer">
+<div>
+<span class="font-medium text-txt-primaryLight dark:text-txt-primaryDark">Acceso a Logs Críticos &amp; Auditoría</span>
+<p class="text-[11px] text-txt-secondaryLight dark:text-txt-secondaryDark">Inspeccionar traces de errores y telemetría de inferencia</p>
+</div>
+<input class="rounded border-border-light dark:border-border-dark text-brand focus:ring-brand h-4 w-4" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Acciones de Modal -->
+<div class="pt-4 flex items-center justify-end gap-2.5 border-t border-border-light dark:border-border-dark">
+<button class="px-4 py-2 rounded-lg bg-elevated-light dark:bg-elevated-dark border border-border-light dark:border-border-dark text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark font-medium transition-colors" onclick="closeModal('user-modal')" type="button">
+              Cancelar
+            </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white font-medium shadow-sm shadow-indigo-500/20 transition-all" type="submit">
+              Guardar Usuario
+            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- SCRIPT DE FILTROS Y MODAL -->
+<script>
+    let currentStatus = 'ALL';
+
+    function setStatusFilter(status, btn) {
+      currentStatus = status;
+      document.querySelectorAll('.status-pill').forEach(b => {
+        b.className = 'status-pill px-3 py-1 rounded text-txt-secondaryLight dark:text-txt-secondaryDark hover:text-txt-primaryLight dark:hover:text-txt-primaryDark transition-all';
+      });
+      btn.className = 'status-pill px-3 py-1 rounded font-medium bg-[#6366F1] text-white transition-all';
+      filterUsers();
+    }
+
+    function filterUsers() {
+      const query = document.getElementById('userSearchInput').value.toLowerCase();
+      const roleVal = document.getElementById('roleFilter').value;
+      const planVal = document.getElementById('planFilter').value;
+      const rows = document.querySelectorAll('.user-row');
+
+      rows.forEach(row => {
+        const name = (row.getAttribute('data-name') || '').toLowerCase();
+        const company = (row.getAttribute('data-company') || '').toLowerCase();
+        const email = (row.getAttribute('data-email') || '').toLowerCase();
+        const role = row.getAttribute('data-role') || '';
+        const plan = row.getAttribute('data-plan') || '';
+        const status = row.getAttribute('data-status') || '';
+
+        const matchesSearch = name.includes(query) || company.includes(query) || email.includes(query);
+        const matchesStatus = (currentStatus === 'ALL') || (status === currentStatus);
+        const matchesRole = (roleVal === 'ALL') || (role === roleVal);
+        const matchesPlan = (planVal === 'ALL') || (plan === planVal);
+
+        if (matchesSearch && matchesStatus && matchesRole && matchesPlan) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById('userSearchInput').value = '';
+      document.getElementById('roleFilter').value = 'ALL';
+      document.getElementById('planFilter').value = 'ALL';
+      currentStatus = 'ALL';
+      const firstPill = document.querySelector('.status-pill');
+      if (firstPill) {
+        setStatusFilter('ALL', firstPill);
+      } else {
+        filterUsers();
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById('modal-title').textContent = 'Crear Nuevo Usuario';
+      document.getElementById('modal-icon').textContent = 'person_add';
+      document.getElementById('form-name').value = '';
+      document.getElementById('form-email').value = '';
+      document.getElementById('form-company').value = '';
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function openEditUser(name, email, company, role, plan, status) {
+      document.getElementById('modal-title').textContent = 'Configurar Usuario - ' + name;
+      document.getElementById('modal-icon').textContent = 'tune';
+      document.getElementById('form-name').value = name;
+      document.getElementById('form-email').value = email;
+      document.getElementById('form-company').value = company;
+      document.getElementById('form-role').value = role;
+      document.getElementById('form-plan').value = plan;
+      document.getElementById('user-modal').classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal('user-modal');
+      }
+    });
+  </script>
+</body></html>

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contrataciones de Agentes - AgentHub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: "#6366F1",
+              hover: "#4F46E5",
+              accent: "#1E2542",
+              light: "#EEF2FF"
+            },
+            canvas: {
+              light: "#F8FAFC",
+              dark: "#0B0F19"
+            },
+            card: {
+              light: "#FFFFFF",
+              dark: "#131A2B"
+            },
+            elevated: {
+              light: "#F1F5F9",
+              dark: "#1E293B"
+            },
+            border: {
+              light: "#E2E8F0",
+              dark: "#293548"
+            },
+            text: {
+              primary: {
+                light: "#0F172A",
+                dark: "#F8FAFC"
+              },
+              secondary: {
+                light: "#64748B",
+                dark: "#94A3B8"
+              }
+            },
+            semantic: {
+              success: "#10B981",
+              warning: "#F59E0B",
+              danger: "#EF4444"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] dark:bg-[#0B0F19] text-[#0F172A] dark:text-[#F8FAFC] min-h-screen transition-colors duration-200">
+<!-- Sidebar Lateral -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-white dark:bg-[#131A2B] border-r border-[#E2E8F0] dark:border-[#293548] z-50 flex flex-col justify-between transition-colors duration-200">
+<div class="flex flex-col flex-1">
+<!-- Logo Oficial AgentHub -->
+<div class="h-16 px-5 flex items-center border-b border-[#E2E8F0] dark:border-[#293548]">
+<img alt="AgentHub Logo" class="h-9 w-auto object-contain dark:hidden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADeoObhZNUkKrsUO0Kfxq9cUxxrzJWteCveXq8JK89_44b_4xngD4zzUwNn8y-gRcyGYYakdyAWMegV_C_AGmJ5owkLlSMAmwhgPBkewmvjPKOVRDowHJ5qm-91uR-puZ3ztjgj5TaHbNliwJeDHzG6YXVInUympAPMBLOeC5W0OZINzsc0pXkpTO6nQih0AvnSlbq8BGmY7eym8INSfsw2OzTfJD5IcZ4s4w-b1KZl1kWlmGqd0bbow"/>
+<img alt="AgentHub Logo" class="h-9 w-auto object-contain hidden dark:block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsTZZ1snwKN7NVCzpMGe1EK3J5Dn-Vrm99Oohu-6-slgN7bUvlaaHYZc2P6NRvg7wuoGRo1iiYhZA9uio3aQ8QZGyx0KOpwWk6Vpv57PmNvFOTBooskHseicJOt0wVj-YG-cevk50248TWGJbmzUycDX2FUP3WbJPOinbSd6_QGomRHI_VyUPtsVtuDNAiJxhh8vxWsGlRNc7ZENWlRV-pEk1hbLg5PAdtzWPNz7yCkkBrIemOCTvHXw"/>
+</div>
+<!-- Navigation -->
+<div class="px-3 py-4 flex-1 overflow-y-auto">
+<div class="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider px-3 mb-2">
+          Plataforma
+        </div>
+<nav class="space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span>Dashboard</span>
+</a>
+<!-- Gestión de usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span>Gestión de usuarios</span>
+</a>
+<!-- Gestión de agentes -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Gestión de agentes</span>
+</a>
+<!-- Skills -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">extension</span>
+<span>Skills</span>
+</a>
+<!-- Contrataciones (ACTIVO) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#6366F1] text-white font-medium text-sm shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Contrataciones</span>
+</a>
+<!-- Log de errores -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] font-medium text-sm transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+<span>Log de errores</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Footer Sidebar con Badge Status Cluster -->
+<div class="p-4 border-t border-[#E2E8F0] dark:border-[#293548]">
+<div class="p-3 bg-[#F1F5F9] dark:bg-[#1E293B] rounded-lg border border-[#E2E8F0] dark:border-[#293548]">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">CLUSTER NEXAI</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
+</span>
+</div>
+<div class="font-mono text-xs text-[#0F172A] dark:text-[#F8FAFC] truncate font-medium">v2.4.0-prod-node</div>
+<div class="mt-2 flex items-center justify-between text-xs text-[#64748B] dark:text-[#94A3B8]">
+<span>Sync Status</span>
+<span class="font-semibold text-[#10B981]">99.98%</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Contenedor Principal (Pl-64 para dejar espacio al sidebar) -->
+<div class="pl-64 flex flex-col min-h-screen">
+<!-- Header Superior (Idéntico al Navbar de Gestión de Agentes) -->
+<header class="sticky top-0 h-16 bg-white dark:bg-[#131A2B] border-b border-[#E2E8F0] dark:border-[#293548] z-40 px-6 flex items-center justify-between gap-4 transition-colors duration-200">
+<!-- Buscador -->
+<div class="flex items-center flex-1 max-w-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] dark:text-[#94A3B8] text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg bg-white dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] placeholder-[#64748B] dark:placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all" placeholder="Buscar agentes, modelos, contratos o logs... (Cmd + K)" type="text"/>
+</div>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-3">
+<!-- Toggle Modo Oscuro/Claro -->
+<button class="w-10 h-10 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-center transition-colors" onclick="document.documentElement.classList.toggle('dark')" title="Alternar Modo Claro / Oscuro">
+<span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
+<span class="material-symbols-outlined text-[20px] hidden dark:inline">light_mode</span>
+</button>
+<!-- Notificaciones con badge -->
+<button class="relative w-10 h-10 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-center transition-colors" title="Notificaciones">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-[#EF4444]"></span>
+</button>
+<div class="h-6 w-[1px] bg-[#E2E8F0] dark:bg-[#293548] mx-1"></div>
+<!-- Perfil Usuario -->
+<div class="flex items-center gap-3 pl-1">
+<div class="w-9 h-9 rounded-full bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+            AD
+          </div>
+<div class="hidden md:flex flex-col text-left">
+<span class="text-sm font-semibold text-[#0F172A] dark:text-[#F8FAFC] leading-tight">Admin NEXAI</span>
+<span class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] tracking-wider uppercase">SUPER ADMIN</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Contenido de Contrataciones de Agentes -->
+<main class="flex-1 p-6 space-y-6">
+<!-- Subcabecera de Sección & CTA -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider mb-1">
+<span>ADMINISTRACIÓN</span>
+<span>/</span>
+<span class="text-[#6366F1] font-bold">CONTRATACIONES DE AGENTES</span>
+</div>
+<h1 class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">Contrataciones de Agentes</h1>
+<p class="text-sm text-[#64748B] dark:text-[#94A3B8] mt-0.5">Marketplace corporativo de agentes virtuales, contratos de alquiler activos y gestión de planes de suscripción empresarial.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#0F172A] dark:text-[#F8FAFC] text-sm font-medium transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-[#64748B] dark:text-[#94A3B8]">download</span>
+<span>Exportar</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="openNewContractModal()">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Nueva Contratación</span>
+</button>
+</div>
+</div>
+<!-- 4 Tarjetas KPI Superiores Destacadas con Bordes Laterales -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1: Total Contratos -->
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#6366F1] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-[#64748B] dark:text-[#94A3B8] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">Total Contratos</span>
+<div class="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] flex items-center justify-center text-[#6366F1]">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">86</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +6.2% este mes
+            </span>
+</div>
+</div>
+<!-- KPI 2: Agentes Alquilados -->
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#10B981] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-[#64748B] dark:text-[#94A3B8] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">Agentes Alquilados</span>
+<div class="w-8 h-8 rounded-lg bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] flex items-center justify-center text-[#10B981]">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">142 <span class="text-xs font-normal text-[#64748B] dark:text-[#94A3B8]">en prod</span></div>
+<span class="inline-flex items-center gap-1.5 text-xs font-medium text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              94.5% disponibilidad SLA
+            </span>
+</div>
+</div>
+<!-- KPI 3: MRR Facturado -->
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#818CF8] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-[#64748B] dark:text-[#94A3B8] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider">MRR Facturado</span>
+<div class="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] flex items-center justify-center text-[#818CF8]">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">€38.450 <span class="text-xs font-normal text-[#64748B] dark:text-[#94A3B8]">/ mes</span></div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +11.8% vs mes anterior
+            </span>
+</div>
+</div>
+<!-- KPI 4: Por Renovar -->
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] border-l-4 border-l-[#F59E0B] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-[#64748B] dark:text-[#94A3B8] mb-3">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#F59E0B]">Por Renovar</span>
+<div class="w-8 h-8 rounded-lg bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] flex items-center justify-center text-[#F59E0B]">
+<span class="material-symbols-outlined text-[20px]">alarm</span>
+</div>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">5 <span class="text-xs font-normal text-[#64748B] dark:text-[#94A3B8]">contratos</span></div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] text-[#F59E0B]">
+              ! Próximos 7 días
+            </span>
+</div>
+</div>
+</div>
+<!-- Panel Principal de Contrataciones: Filtros y Tabla -->
+<div class="rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] shadow-sm overflow-hidden flex flex-col">
+<!-- Barra de Búsqueda y Filtros de la Tabla -->
+<div class="p-4 border-b border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+<!-- Búsqueda rápida -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] dark:text-[#94A3B8] text-[18px]">search</span>
+<input class="w-full pl-9 pr-4 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] placeholder-[#64748B] dark:placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:border-transparent transition-all" id="contractSearchInput" placeholder="Filtrar por agente, empresa o contrato..." type="text"/>
+</div>
+<!-- Filtros de Estado y Plan -->
+<div class="flex items-center gap-2.5 flex-wrap">
+<!-- Quick Filter Tabs -->
+<div class="flex items-center gap-1.5 bg-[#F1F5F9] dark:bg-[#1E293B] p-1 rounded-lg border border-[#E2E8F0] dark:border-[#293548]">
+<button class="contract-tab-btn px-3 py-1 rounded-md text-xs font-semibold bg-white dark:bg-[#131A2B] text-[#0F172A] dark:text-[#F8FAFC] shadow-sm transition-all" onclick="filterContracts('all', this)">Todos (86)</button>
+<button class="contract-tab-btn px-3 py-1 rounded-md text-xs font-medium text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] transition-colors" onclick="filterContracts('active', this)">Activos (78)</button>
+<button class="contract-tab-btn px-3 py-1 rounded-md text-xs font-medium text-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[rgba(120,53,15,0.3)] transition-colors" onclick="filterContracts('renew', this)">Por Renovar (5)</button>
+<button class="contract-tab-btn px-3 py-1 rounded-md text-xs font-medium text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-[rgba(127,29,29,0.3)] transition-colors" onclick="filterContracts('ended', this)">Finalizados (3)</button>
+</div>
+<!-- Filtro Plan -->
+<select class="px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option value="">Todos los Planes</option>
+<option value="enterprise">Enterprise SLA</option>
+<option value="pro">Pro Tier</option>
+<option value="scale">Scale Tier</option>
+<option value="starter">Starter Basic</option>
+</select>
+<!-- Selector de Ordenación -->
+<select class="px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option value="recent">Fecha: Más reciente</option>
+<option value="mrr">Mayor MRR</option>
+<option value="expiry">Próximo a expirar</option>
+</select>
+</div>
+</div>
+<!-- Tabla SaaS de Contrataciones -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-[#0F172A] dark:text-[#F8FAFC]">
+<thead>
+<tr class="bg-[#F8FAFC] dark:bg-[#0B0F19] border-b border-[#E2E8F0] dark:border-[#293548] text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider select-none">
+<th class="py-3.5 px-5">Agente &amp; Plan</th>
+<th class="py-3.5 px-5">Cliente / Empresa</th>
+<th class="py-3.5 px-5">Skills Activas</th>
+<th class="py-3.5 px-5">Periodo / Vencimiento</th>
+<th class="py-3.5 px-5">Facturación</th>
+<th class="py-3.5 px-5">Estado</th>
+<th class="py-3.5 px-5 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E2E8F0] dark:divide-[#293548]">
+<!-- Fila 1: Nexus Support v2 - Activo (>60 días) -->
+<tr class="contract-item-row hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]/40 transition-colors group" data-contract='{"id":"CNT-9821","agent":"Nexus Support v2","model":"Claude 3.5 Sonnet","tier":"ENTERPRISE SLA","client":"NexaCorp Systems","email":"soporte@nexacorp.io","signup":"12 Nov 2024","start":"15 Ene 2025","end":"15 Ene 2026","remaining":"284 días restantes","status":"Activo","statusType":"active","tokens":"10M tokens incl.","skills":[{"name":"Zendesk API","cost":450},{"name":"RAG Docs Empresarial","cost":600},{"name":"Email &amp; Calendario","cost":350},{"name":"Ejecución Sandbox","cost":700}],"basePrice":0,"total":2100}' data-status="active">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                        Nexus Support
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">v2.4</span>
+</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8] flex items-center gap-1.5 mt-0.5">
+<span>Claude 3.5 Sonnet</span>
+<span>•</span>
+<span class="px-2 py-0.2 rounded font-semibold text-[10px] bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1]">ENTERPRISE SLA</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-medium text-xs text-[#0F172A] dark:text-[#F8FAFC]">NexaCorp Systems</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8]">soporte@nexacorp.io</div>
+<div class="text-[10px] text-[#94A3B8] dark:text-[#64748B] mt-0.5">Alta: 12 Nov 2024</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-wrap gap-1.5 max-w-xs">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Zendesk API
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      RAG Docs
+                    </span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-md bg-[#EEF2FF] dark:bg-[#1E2542] text-[11px] font-semibold text-[#6366F1]">
+                      +3
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col text-xs leading-relaxed">
+<span class="text-[#0F172A] dark:text-[#F8FAFC] font-medium">Inicio: 15 Ene 2025</span>
+<span class="text-[#64748B] dark:text-[#94A3B8]">Fin: 15 Ene 2026</span>
+<!-- Neutro porque faltan más de 60 días -->
+<span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">284 días restantes</span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-mono text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">€2.100 <span class="font-normal text-[10px] text-[#64748B] dark:text-[#94A3B8]">/mes</span></div>
+<div class="text-[10px] text-[#64748B] dark:text-[#94A3B8]">10M tokens incl.</div>
+</td>
+<td class="py-4 px-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-5 text-right relative">
+<button class="action-dropdown-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors shadow-sm" onclick="toggleDropdown(this, event)">
+<span>Acciones</span>
+<span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<div class="dropdown-menu absolute right-5 mt-1.5 w-44 bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-xl shadow-xl py-1 hidden z-30">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2" onclick="openDetailModalFromRow(this)">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">visibility</span> Ver detalle
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#64748B]">receipt</span> Descargar Factura
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-[rgba(127,29,29,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span> Pausar Alquiler
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Fila 2: FinanceAnalyzer Pro - Por Renovar (<60 días -> ALERTA ROJA) -->
+<tr class="contract-item-row hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]/40 transition-colors group" data-contract='{"id":"CNT-7640","agent":"FinanceAnalyzer Pro","model":"OpenAI GPT-4o","tier":"PRO TIER","client":"FinTech Solutions S.L.","email":"cfo@fintechsol.es","signup":"03 Feb 2024","start":"01 Abr 2024","end":"30 Abr 2025","remaining":"Expira en 5 días","status":"Por Renovar","statusType":"renew","tokens":"5M tokens incl.","skills":[{"name":"Stripe Webhooks","cost":550},{"name":"Excel Realtime Engine","cost":500},{"name":"Audit Trails Sync","cost":400}],"basePrice":0,"total":1450}' data-status="renew">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[22px]">account_balance</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                        FinanceAnalyzer
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">v1.9</span>
+</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8] flex items-center gap-1.5 mt-0.5">
+<span>OpenAI GPT-4o</span>
+<span>•</span>
+<span class="px-2 py-0.2 rounded font-semibold text-[10px] bg-[#EEF2FF] dark:bg-[#1E2542] text-[#818CF8]">PRO TIER</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-medium text-xs text-[#0F172A] dark:text-[#F8FAFC]">FinTech Solutions S.L.</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8]">cfo@fintechsol.es</div>
+<div class="text-[10px] text-[#94A3B8] dark:text-[#64748B] mt-0.5">Alta: 03 Feb 2024</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-wrap gap-1.5 max-w-xs">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Stripe Webhooks
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Excel Engine
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col text-xs leading-relaxed">
+<span class="text-[#0F172A] dark:text-[#F8FAFC] font-medium">Inicio: 01 Abr 2024</span>
+<span class="text-[#64748B] dark:text-[#94A3B8]">Fin: 30 Abr 2025</span>
+<!-- ALERTA EN ROJO (<60 días) -->
+<span class="text-xs font-bold text-[#EF4444] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Expira en 5 días
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-mono text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">€1.450 <span class="font-normal text-[10px] text-[#64748B] dark:text-[#94A3B8]">/mes</span></div>
+<div class="text-[10px] text-[#64748B] dark:text-[#94A3B8]">5M tokens incl.</div>
+</td>
+<td class="py-4 px-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FFFBEB] dark:bg-[rgba(120,53,15,0.3)] text-[#F59E0B]">
+<span class="w-2 h-2 rounded-full bg-[#F59E0B]"></span>
+                    Por Renovar
+                  </span>
+</td>
+<td class="py-4 px-5 text-right relative">
+<button class="action-dropdown-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors shadow-sm" onclick="toggleDropdown(this, event)">
+<span>Acciones</span>
+<span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<div class="dropdown-menu absolute right-5 mt-1.5 w-44 bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-xl shadow-xl py-1 hidden z-30">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2" onclick="openDetailModalFromRow(this)">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">visibility</span> Ver detalle
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-semibold text-[#F59E0B] hover:bg-[#FFFBEB] dark:hover:bg-[rgba(120,53,15,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">autorenew</span> Renovar Ahora
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#64748B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">receipt</span> Descargar Factura
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Fila 3: SalesLead Hunter - Activo (>60 días) -->
+<tr class="contract-item-row hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]/40 transition-colors group" data-contract='{"id":"CNT-5190","agent":"SalesLead Hunter","model":"Llama 3.3 70B","tier":"SCALE TIER","client":"SaaS Growth Lab","email":"growth@saaslab.com","signup":"19 Ene 2025","start":"19 Ene 2025","end":"19 Jul 2025","remaining":"91 días restantes","status":"Activo","statusType":"active","tokens":"3M tokens incl.","skills":[{"name":"HubSpot Sync","cost":300},{"name":"LinkedIn Bot","cost":350},{"name":"Email Warmup","cost":200}],"basePrice":0,"total":850}' data-status="active">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[22px]">contact_mail</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                        SalesLead Hunter
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">v3.1</span>
+</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8] flex items-center gap-1.5 mt-0.5">
+<span>Llama 3.3 70B</span>
+<span>•</span>
+<span class="px-2 py-0.2 rounded font-semibold text-[10px] bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">SCALE TIER</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-medium text-xs text-[#0F172A] dark:text-[#F8FAFC]">SaaS Growth Lab</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8]">growth@saaslab.com</div>
+<div class="text-[10px] text-[#94A3B8] dark:text-[#64748B] mt-0.5">Alta: 19 Ene 2025</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-wrap gap-1.5 max-w-xs">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      HubSpot Sync
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      LinkedIn Bot
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Email Warmup
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col text-xs leading-relaxed">
+<span class="text-[#0F172A] dark:text-[#F8FAFC] font-medium">Inicio: 19 Ene 2025</span>
+<span class="text-[#64748B] dark:text-[#94A3B8]">Fin: 19 Jul 2025</span>
+<!-- Neutro porque faltan 91 días (>60) -->
+<span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">91 días restantes</span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-mono text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">€850 <span class="font-normal text-[10px] text-[#64748B] dark:text-[#94A3B8]">/mes</span></div>
+<div class="text-[10px] text-[#64748B] dark:text-[#94A3B8]">3M tokens incl.</div>
+</td>
+<td class="py-4 px-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-5 text-right relative">
+<button class="action-dropdown-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors shadow-sm" onclick="toggleDropdown(this, event)">
+<span>Acciones</span>
+<span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<div class="dropdown-menu absolute right-5 mt-1.5 w-44 bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-xl shadow-xl py-1 hidden z-30">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2" onclick="openDetailModalFromRow(this)">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">visibility</span> Ver detalle
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#64748B]">receipt</span> Descargar Factura
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-[rgba(127,29,29,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span> Pausar Alquiler
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Fila 4: LegalDoc Parser - Activo (>60 días) -->
+<tr class="contract-item-row hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]/40 transition-colors group" data-contract='{"id":"CNT-3310","agent":"LegalDoc Parser","model":"GPT-4o 32k","tier":"ENTERPRISE SLA","client":"Acme Legal Tech","email":"legal-it@acmelegal.com","signup":"10 Ago 2024","start":"10 Ago 2024","end":"10 Ago 2025","remaining":"120 días restantes","status":"Activo","statusType":"active","tokens":"25M tokens incl.","skills":[{"name":"OCR Vision Engine","cost":1200},{"name":"Clause Redact AI","cost":1100},{"name":"DocuSign Enterprise API","cost":900}],"basePrice":0,"total":3200}' data-status="active">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[22px]">gavel</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                        LegalDoc Parser
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">v2.0</span>
+</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8] flex items-center gap-1.5 mt-0.5">
+<span>GPT-4o 32k</span>
+<span>•</span>
+<span class="px-2 py-0.2 rounded font-semibold text-[10px] bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1]">ENTERPRISE SLA</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-medium text-xs text-[#0F172A] dark:text-[#F8FAFC]">Acme Legal Tech</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8]">legal-it@acmelegal.com</div>
+<div class="text-[10px] text-[#94A3B8] dark:text-[#64748B] mt-0.5">Alta: 10 Ago 2024</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-wrap gap-1.5 max-w-xs">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      OCR Vision
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Clause Redact
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      DocuSign API
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col text-xs leading-relaxed">
+<span class="text-[#0F172A] dark:text-[#F8FAFC] font-medium">Inicio: 10 Ago 2024</span>
+<span class="text-[#64748B] dark:text-[#94A3B8]">Fin: 10 Ago 2025</span>
+<!-- Neutro porque faltan 120 días (>60) -->
+<span class="text-xs font-semibold text-[#64748B] dark:text-[#94A3B8]">120 días restantes</span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-mono text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">€3.200 <span class="font-normal text-[10px] text-[#64748B] dark:text-[#94A3B8]">/mes</span></div>
+<div class="text-[10px] text-[#64748B] dark:text-[#94A3B8]">25M tokens incl.</div>
+</td>
+<td class="py-4 px-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    Activo
+                  </span>
+</td>
+<td class="py-4 px-5 text-right relative">
+<button class="action-dropdown-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors shadow-sm" onclick="toggleDropdown(this, event)">
+<span>Acciones</span>
+<span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<div class="dropdown-menu absolute right-5 mt-1.5 w-44 bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-xl shadow-xl py-1 hidden z-30">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2" onclick="openDetailModalFromRow(this)">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">visibility</span> Ver detalle
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#64748B]">receipt</span> Descargar Factura
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#EF4444] hover:bg-[#FEF2F2] dark:hover:bg-[rgba(127,29,29,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span> Pausar Alquiler
+                    </button>
+</div>
+</td>
+</tr>
+<!-- Fila 5: HR Recruiter - Finalizado (Finalizado hace 3 meses -> ALERTA ROJA) -->
+<tr class="contract-item-row hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B]/40 transition-colors group opacity-85" data-contract='{"id":"CNT-1049","agent":"HR Recruiter","model":"Mistral Large","tier":"STARTER","client":"Global Logistics SA","email":"hr@globallogistics.com","signup":"15 Oct 2024","start":"15 Oct 2024","end":"15 Ene 2025","remaining":"Finalizado hace 3 meses","status":"Finalizado","statusType":"ended","tokens":"1M tokens incl.","skills":[{"name":"Google Calendar Sync","cost":200},{"name":"Gmail Enterprise Bot","cost":250}],"basePrice":0,"total":450}' data-status="ended">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] flex items-center justify-center font-bold shrink-0">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</div>
+<div>
+<div class="font-semibold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                        HR Recruiter
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">v1.2</span>
+</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8] flex items-center gap-1.5 mt-0.5">
+<span>Mistral Large</span>
+<span>•</span>
+<span class="px-2 py-0.2 rounded font-semibold text-[10px] bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">STARTER</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-medium text-xs text-[#0F172A] dark:text-[#F8FAFC]">Global Logistics SA</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8]">hr@globallogistics.com</div>
+<div class="text-[10px] text-[#94A3B8] dark:text-[#64748B] mt-0.5">Alta: 15 Oct 2024</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-wrap gap-1.5 max-w-xs">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Google Calendar
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-[#1E293B] text-[11px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+                      Gmail Bot
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="flex flex-col text-xs leading-relaxed">
+<span class="text-[#0F172A] dark:text-[#F8FAFC] font-medium">Inicio: 15 Oct 2024</span>
+<span class="text-[#64748B] dark:text-[#94A3B8]">Fin: 15 Ene 2025</span>
+<!-- ALERTA EN ROJO (Finalizado <= 3 meses) -->
+<span class="text-xs font-bold text-[#EF4444] flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event_busy</span> Finalizado hace 3 meses
+                    </span>
+</div>
+</td>
+<td class="py-4 px-5">
+<div class="font-mono text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">€450 <span class="font-normal text-[10px] text-[#64748B] dark:text-[#94A3B8]">/mes</span></div>
+<div class="text-[10px] text-[#64748B] dark:text-[#94A3B8]">1M tokens incl.</div>
+</td>
+<td class="py-4 px-5">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#FEF2F2] dark:bg-[rgba(127,29,29,0.3)] text-[#EF4444]">
+<span class="w-2 h-2 rounded-full bg-[#EF4444]"></span>
+                    Finalizado
+                  </span>
+</td>
+<td class="py-4 px-5 text-right relative">
+<button class="action-dropdown-btn inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors shadow-sm" onclick="toggleDropdown(this, event)">
+<span>Acciones</span>
+<span class="material-symbols-outlined text-[14px]">arrow_drop_down</span>
+</button>
+<div class="dropdown-menu absolute right-5 mt-1.5 w-44 bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-xl shadow-xl py-1 hidden z-30">
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2" onclick="openDetailModalFromRow(this)">
+<span class="material-symbols-outlined text-[16px] text-[#6366F1]">visibility</span> Ver detalle
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-semibold text-[#10B981] hover:bg-[#ECFDF5] dark:hover:bg-[rgba(6,78,59,0.2)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">refresh</span> Reactivar Alquiler
+                    </button>
+<button class="w-full text-left px-3.5 py-2 text-xs font-medium text-[#64748B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">archive</span> Archivar Contrato
+                    </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación Elegante -->
+<div class="p-4 border-t border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#64748B] dark:text-[#94A3B8]">
+<div>
+            Mostrando <span class="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">1 a 5</span> de <span class="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">86</span> contrataciones registradas
+          </div>
+<div class="flex items-center gap-1.5">
+<button class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] font-medium text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] transition-colors disabled:opacity-50" disabled="">
+              Anterior
+            </button>
+<button class="w-8 h-8 rounded-lg bg-[#6366F1] text-white font-semibold flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] font-medium transition-colors flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] font-medium transition-colors flex items-center justify-center">3</button>
+<span class="px-1 text-[#64748B] dark:text-[#94A3B8]">...</span>
+<button class="w-8 h-8 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] font-medium transition-colors flex items-center justify-center">18</button>
+<button class="px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] font-medium text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] transition-colors">
+              Siguiente
+            </button>
+</div>
+</div>
+</div>
+<!-- Métricas Complementarias de Despliegues Autónomos -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#6366F1] text-[20px]">hub</span>
+<span class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC]">Consumo Global de Tokens</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">Dentro de SLA</span>
+</div>
+<p class="text-xs text-[#64748B] dark:text-[#94A3B8] mb-3">Uso mensual consolidado entre todos los clientes con agentes activos en el cluster.</p>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs text-[#64748B] dark:text-[#94A3B8]">
+<span>64.8M / 100M tokens asignados</span>
+<span class="font-bold text-[#6366F1]">64.8%</span>
+</div>
+<div class="w-full bg-[#E2E8F0] dark:bg-[#293548] h-2 rounded-full overflow-hidden">
+<div class="bg-[#6366F1] h-full rounded-full" style="width: 64.8%;"></div>
+</div>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#10B981] text-[20px]">verified</span>
+<span class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC]">Cumplimiento SLA</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#ECFDF5] dark:bg-[rgba(6,78,59,0.3)] text-[#10B981]">99.98% Real</span>
+</div>
+<p class="text-xs text-[#64748B] dark:text-[#94A3B8] mb-3">Latencia media de inferencia de 240ms con cero incidencias críticas en las últimas 72 horas.</p>
+<div class="flex items-center justify-between text-xs text-[#64748B] dark:text-[#94A3B8] pt-1">
+<span>Tiempo de respuesta: <strong class="text-[#0F172A] dark:text-[#F8FAFC]">180ms</strong></span>
+<span>Errores de API: <strong class="text-[#10B981]">0.01%</strong></span>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#F59E0B] text-[20px]">schedule</span>
+<span class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC]">Cola de Provisionamiento</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">3 en espera</span>
+</div>
+<p class="text-xs text-[#64748B] dark:text-[#94A3B8] mb-3">Instancias de agentes preparándose para despliegue automatizado en entornos VPC dedicados.</p>
+<div class="flex items-center justify-between text-xs">
+<span class="text-[#64748B] dark:text-[#94A3B8]">Próximo despliegue: <strong class="text-[#0F172A] dark:text-[#F8FAFC]">FinTech Cloud</strong></span>
+<span class="font-bold text-[#6366F1]">~4 min</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Interactivo: 'Ver Detalle' de Contratación -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="contractDetailModal">
+<div class="relative w-full max-w-2xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-[#F8FAFC] dark:bg-[#0B0F19] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]" id="modalDetailTitle">Detalle de Contrato</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1]" id="modalContractId">CNT-9821</span>
+</div>
+<span class="text-xs text-[#64748B] dark:text-[#94A3B8]">Desglose de suscripción, modelo LLM y pricing de skills activas</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="closeDetailModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-6 overflow-y-auto space-y-5 text-sm">
+<!-- Tarjeta Resumen Cliente / Agente -->
+<div class="p-4 rounded-xl bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<span class="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider block mb-1">Cliente / Organización</span>
+<div class="font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC]" id="modalClientName">NexaCorp Systems</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8]" id="modalClientEmail">soporte@nexacorp.io</div>
+<div class="text-[11px] text-[#94A3B8] mt-1" id="modalSignupDate">Fecha de Alta: 12 Nov 2024</div>
+</div>
+<div>
+<span class="text-[11px] font-semibold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider block mb-1">Agente &amp; Modelo LLM</span>
+<div class="font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5" id="modalAgentInfo">
+              Nexus Support v2.4
+            </div>
+<div class="text-xs text-[#6366F1] font-semibold" id="modalModelInfo">Claude 3.5 Sonnet</div>
+<div class="text-[11px] text-[#64748B] dark:text-[#94A3B8] mt-1" id="modalTokensInfo">10M tokens mensuales asignados</div>
+</div>
+</div>
+<!-- Periodo y Estado del Contrato -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="p-3 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B]">
+<span class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Fecha de Inicio</span>
+<div class="font-semibold text-xs text-[#0F172A] dark:text-[#F8FAFC] mt-0.5" id="modalStartDate">15 Ene 2025</div>
+</div>
+<div class="p-3 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B]">
+<span class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Fecha de Vencimiento</span>
+<div class="font-semibold text-xs text-[#0F172A] dark:text-[#F8FAFC] mt-0.5" id="modalEndDate">15 Ene 2026</div>
+</div>
+<div class="p-3 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B]">
+<span class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Estado SLA</span>
+<div class="mt-0.5" id="modalStatusBadge">
+<span class="inline-flex items-center gap-1 text-xs font-semibold text-[#10B981]">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span> Activo
+              </span>
+</div>
+</div>
+</div>
+<!-- Desglose de Skills con Precios Individuales -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-wider">Desglose de Skills &amp; Conectores Activos</span>
+<span class="text-xs text-[#64748B] dark:text-[#94A3B8]">Tarifa mensual</span>
+</div>
+<div class="border border-[#E2E8F0] dark:border-[#293548] rounded-xl overflow-hidden divide-y divide-[#E2E8F0] dark:divide-[#293548]" id="modalSkillsList">
+<!-- Rellenado dinámicamente con JS -->
+</div>
+</div>
+<!-- Resumen de Costes / Factura Mensual -->
+<div class="p-4 rounded-xl bg-[#EEF2FF] dark:bg-[#1E2542] border border-[#C7D2FE] dark:border-[#293548] flex items-center justify-between">
+<div>
+<div class="font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC]">Coste Mensual Consolidado</div>
+<div class="text-xs text-[#64748B] dark:text-[#94A3B8]">Facturación recurrente mensual (IVA no incluido)</div>
+</div>
+<div class="text-right">
+<div class="font-mono text-2xl font-bold text-[#6366F1]" id="modalTotalMonthly">€2.100 / mes</div>
+<div class="text-[11px] text-[#10B981] font-semibold">Pago domiciliado activo</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 bg-[#F8FAFC] dark:bg-[#0B0F19] border-t border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-xs font-medium text-[#0F172A] dark:text-[#F8FAFC] transition-colors">
+<span class="material-symbols-outlined text-[16px] text-[#64748B]">print</span> Imprimir Carátula
+        </button>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#0F172A] dark:text-[#F8FAFC] text-sm font-medium transition-colors" onclick="closeDetailModal()">
+            Cerrar
+          </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="closeDetailModal()">
+            Descargar Factura PDF
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Interactivo: 'Nueva Contratación' -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0F172A]/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-200" id="newContractModal">
+<div class="relative w-full max-w-2xl bg-white dark:bg-[#131A2B] border border-[#E2E8F0] dark:border-[#293548] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="px-6 py-4 bg-[#F8FAFC] dark:bg-[#0B0F19] border-b border-[#E2E8F0] dark:border-[#293548] flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#EEF2FF] dark:bg-[#1E2542] text-[#6366F1] flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[22px]">post_add</span>
+</div>
+<div>
+<h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">Nueva Contratación de Agente</h3>
+<span class="text-xs text-[#64748B] dark:text-[#94A3B8]">Configurar plan de alquiler corporativo, modelo base y SLA</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] flex items-center justify-center transition-colors" onclick="closeNewContractModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body Form -->
+<div class="p-6 overflow-y-auto space-y-4 text-sm">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] mb-1.5">Agente a Alquilar</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option>Nexus Support v2.4 (Claude 3.5)</option>
+<option>FinanceAnalyzer Pro v1.9 (GPT-4o)</option>
+<option>SalesLead Hunter v3.1 (Llama 3.3)</option>
+<option>LegalDoc Parser v2.0 (GPT-4o 32k)</option>
+<option>HR Recruiter v1.2 (Mistral Large)</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] mb-1.5">Plan Corporativo SLA</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option>Enterprise SLA (€2.100 / mes)</option>
+<option>Pro Tier (€1.450 / mes)</option>
+<option>Scale Tier (€850 / mes)</option>
+<option>Starter Basic (€450 / mes)</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] mb-1.5">Cliente / Organización</label>
+<input class="w-full px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] placeholder-[#64748B] dark:placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#6366F1]" placeholder="ej. Santander Global, Telefónica..." type="text"/>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] mb-1.5">Duración del Contrato</label>
+<select class="w-full px-3 py-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0B0F19] border border-[#E2E8F0] dark:border-[#293548] text-sm text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-[#6366F1]">
+<option>12 Meses (Anual - 15% Descuento)</option>
+<option>6 Meses (Semestral)</option>
+<option>Mensual recurrente</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] mb-2">Skills y Conectores a Desplegar</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input checked="" class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>Zendesk / Jira API</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input checked="" class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>RAG Base Datos</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>Email &amp; Calendario</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input checked="" class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>Sandbox Seguro</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>OCR &amp; Visión</span>
+</label>
+<label class="flex items-center gap-2 p-2.5 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-[#F8FAFC] dark:bg-[#0B0F19] text-xs cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B]">
+<input class="rounded text-[#6366F1] focus:ring-0" type="checkbox"/>
+<span>Slack Bot Sync</span>
+</label>
+</div>
+</div>
+<div class="p-3.5 rounded-xl bg-[#EEF2FF] dark:bg-[#1E2542] border border-[#C7D2FE] dark:border-[#293548] flex items-start gap-3 text-xs text-[#64748B] dark:text-[#94A3B8]">
+<span class="material-symbols-outlined text-[#6366F1] text-[18px] shrink-0 mt-0.5">info</span>
+<p class="leading-relaxed">
+            Al activar el contrato, la instancia del agente se instanciará automáticamente en el cluster <strong class="text-[#0F172A] dark:text-[#F8FAFC]">CLUSTER 01 - PROD</strong> con una reserva dedicada de memoria vectorial y aislamiento por VPC.
+          </p>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-6 py-4 bg-[#F8FAFC] dark:bg-[#0B0F19] border-t border-[#E2E8F0] dark:border-[#293548] flex items-center justify-end gap-3">
+<button class="px-4 py-2 rounded-lg border border-[#E2E8F0] dark:border-[#293548] bg-white dark:bg-[#131A2B] hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] text-[#0F172A] dark:text-[#F8FAFC] text-sm font-medium transition-colors" onclick="closeNewContractModal()">
+          Cancelar
+        </button>
+<button class="px-4 py-2 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-medium transition-all shadow-sm active:scale-95" onclick="closeNewContractModal()">
+          Activar Contratación
+        </button>
+</div>
+</div>
+</div>
+<!-- Scripts para Dropdown de Acciones, Modal y Filtrado -->
+<script>
+    // Gestión del dropdown 'Acciones ▾'
+    function toggleDropdown(btn, event) {
+      event.stopPropagation();
+      const parentTd = btn.closest('td');
+      const menu = parentTd.querySelector('.dropdown-menu');
+      
+      // Cerrar otros dropdowns abiertos
+      document.querySelectorAll('.dropdown-menu').forEach(m => {
+        if (m !== menu) m.classList.add('hidden');
+      });
+
+      menu.classList.toggle('hidden');
+    }
+
+    // Cerrar dropdowns al hacer click en cualquier parte
+    document.addEventListener('click', function(e) {
+      document.querySelectorAll('.dropdown-menu').forEach(m => {
+        m.classList.add('hidden');
+      });
+    });
+
+    // Abrir Modal de Detalle con datos de la fila
+    function openDetailModalFromRow(btn) {
+      const row = btn.closest('tr');
+      const rawData = row.dataset.contract;
+      if (!rawData) return;
+      const data = JSON.parse(rawData);
+
+      document.getElementById('modalContractId').innerText = data.id;
+      document.getElementById('modalClientName').innerText = data.client;
+      document.getElementById('modalClientEmail').innerText = data.email;
+      document.getElementById('modalSignupDate').innerText = 'Fecha de Alta: ' + data.signup;
+      document.getElementById('modalAgentInfo').innerHTML = data.agent + ' <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#F1F5F9] dark:bg-[#1E293B] text-[#64748B] dark:text-[#94A3B8]">' + data.tier + '</span>';
+      document.getElementById('modalModelInfo').innerText = data.model;
+      document.getElementById('modalTokensInfo').innerText = data.tokens;
+      document.getElementById('modalStartDate').innerText = data.start;
+      document.getElementById('modalEndDate').innerText = data.end;
+      document.getElementById('modalTotalMonthly').innerText = '€' + data.total.toLocaleString() + ' / mes';
+
+      // Semáforo Estado
+      let badgeHtml = '';
+      if (data.statusType === 'active') {
+        badgeHtml = '<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#10B981]"><span class="w-2 h-2 rounded-full bg-[#10B981]"></span> Activo (' + data.remaining + ')</span>';
+      } else if (data.statusType === 'renew') {
+        badgeHtml = '<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F59E0B]"><span class="w-2 h-2 rounded-full bg-[#F59E0B]"></span> Por Renovar (' + data.remaining + ')</span>';
+      } else {
+        badgeHtml = '<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#EF4444]"><span class="w-2 h-2 rounded-full bg-[#EF4444]"></span> Finalizado (' + data.remaining + ')</span>';
+      }
+      document.getElementById('modalStatusBadge').innerHTML = badgeHtml;
+
+      // Lista de Skills con precios
+      const listContainer = document.getElementById('modalSkillsList');
+      listContainer.innerHTML = '';
+      data.skills.forEach(skill => {
+        const item = document.createElement('div');
+        item.className = 'p-3 flex items-center justify-between text-xs bg-white dark:bg-[#131A2B]';
+        item.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[#6366F1] text-[16px]">extension</span>
+            <span class="font-medium text-[#0F172A] dark:text-[#F8FAFC]">${skill.name}</span>
+          </div>
+          <span class="font-mono font-semibold text-[#0F172A] dark:text-[#F8FAFC]">€${skill.cost}/mes</span>
+        `;
+        listContainer.appendChild(item);
+      });
+
+      const modal = document.getElementById('contractDetailModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById('contractDetailModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function openNewContractModal() {
+      const modal = document.getElementById('newContractModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeNewContractModal() {
+      const modal = document.getElementById('newContractModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    // Filtrar tabla por tabs
+    function filterContracts(status, btn) {
+      document.querySelectorAll('.contract-tab-btn').forEach(b => {
+        b.classList.remove('bg-white', 'dark:bg-[#131A2B]', 'shadow-sm', 'font-semibold', 'text-[#0F172A]', 'dark:text-[#F8FAFC]');
+        b.classList.add('font-medium');
+      });
+      btn.classList.add('bg-white', 'dark:bg-[#131A2B]', 'shadow-sm', 'font-semibold', 'text-[#0F172A]', 'dark:text-[#F8FAFC]');
+      
+      const rows = document.querySelectorAll('.contract-item-row');
+      rows.forEach(r => {
+        if (status === 'all' || r.dataset.status === status) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    // Búsqueda en vivo
+    const searchInput = document.getElementById('contractSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('.contract-item-row');
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(query) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+</body></html>
